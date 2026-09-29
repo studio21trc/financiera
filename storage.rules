@@ -1,0 +1,41 @@
+rules_version = '2';
+
+// Reglas de Firebase Storage — Grupo Luján Financiera
+// Pégalas en: Firebase Console → Storage → Reglas → Publicar
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email != null
+        && request.auth.token.email.lower() in ['jesus.lujanrdz@gmail.com'];
+    }
+    function esDueno(uid) { return request.auth != null && request.auth.uid == uid; }
+    function imagenValida() {
+      return request.resource.contentType.matches('image/.*')
+        && request.resource.size < 10 * 1024 * 1024;
+    }
+
+    // Identificaciones y comprobantes de domicilio: solo el dueño las sube; solo dueño y admin las ven.
+    match /credenciales/{uid}/{archivo} {
+      allow read: if isAdmin() || esDueno(uid);
+      allow create: if esDueno(uid) && imagenValida();
+      allow delete: if isAdmin();
+    }
+    match /domicilio/{uid}/{archivo} {
+      allow read: if isAdmin() || esDueno(uid);
+      allow create: if esDueno(uid) && imagenValida();
+      allow delete: if isAdmin();
+    }
+    // Comprobantes de pago (ruta nueva: pagos/{uid}/{idPréstamo}/archivo)
+    match /pagos/{uid}/{sid}/{archivo} {
+      allow read: if isAdmin() || esDueno(uid);
+      allow create: if esDueno(uid) && imagenValida();
+      allow delete: if isAdmin();
+    }
+    // Comprobantes antiguos (ruta anterior: pagos/{idPréstamo}/archivo) — solo lectura para el admin
+    match /pagos/{sid}/{archivo} {
+      allow read: if isAdmin();
+    }
+  }
+}

@@ -1,0 +1,93 @@
+rules_version = '2';
+
+// Reglas de seguridad de Firestore — Grupo Luján Financiera
+// Pégalas en: Firebase Console → Firestore Database → Reglas → Publicar
+// ⚠️ Si cambias el correo del administrador, cámbialo también aquí, en storage.rules y en admin.html.
+// ⚠️ Si cambias montos/plazo en prestamos.html (CONFIG_LUJAN), actualiza validaNueva().
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isAdmin() {
+      return signedIn() && request.auth.token.email != null
+        && request.auth.token.email.lower() in ['jesus.lujanrdz@gmail.com'];
+    }
+    function soloCambia(campos) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(campos);
+    }
+
+    // Perfil del cliente
+    match /users/{uid} {
+      allow read: if isAdmin() || (signedIn() && request.auth.uid == uid);
+      allow create, update: if signedIn() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['nombre','telefono','clabe','email','aceptoPrivacidad','createdAt']);
+      allow delete: if isAdmin();
+    }
+
+    // Solicitudes / préstamos
+    match /solicitudes/{sid} {
+
+      // Nueva solicitud: siempre "pendiente" y con las condiciones vigentes (no se pueden alterar desde el navegador)
+      function validaNueva() {
+        let d = request.resource.data;
+        return d.uid == request.auth.uid
+          && d.estado == 'pendiente'
+          && d.contratoAceptado == false
+          && d.monto is int && d.monto >= 5000 && d.monto <= 50000 && d.monto % 1000 == 0
+          && d.cuotaSemanal is int && d.cuotaSemanal * 10 == d.monto
+          && d.plazo == 16
+          && d.createdAt == request.time
+          && d.nombre is string && d.nombre.size() > 0 && d.nombre.size() <= 120
+          && d.telefono is string && d.telefono.matches('^[0-9]{10}$')
+          && d.clabe is string && d.clabe.matches('^[0-9]{18}$')
+          && d.keys().hasOnly(['uid','nombre','telefono','clabe','email','ref1Nombre','ref1Tel','ref2Nombre','ref2Tel',
+                               'credencialURL','comprobanteURL','monto','cuotaSemanal','plazo','estado',
+                               'esPrimerPrestamo','contratoAceptado','createdAt']);
+      }
+      // El cliente solo puede: aceptar el contrato (aprobado → activo) …
+      function aceptaContrato() {
+        return resource.data.estado == 'aprobado'
+          && request.resource.data.estado == 'activo'
+          && request.resource.data.contratoAceptado == true
+          && request.resource.data.fechaInicio == request.time
+          && soloCambia(['estado','contratoAceptado','fechaInicio','calendarioV']);
+      }
+      // … o cancelar su solicitud mientras está pendiente.
+      function cancela() {
+        return resource.data.estado == 'pendiente'
+          && request.resource.data.estado == 'cancelado'
+          && soloCambia(['estado','canceladoAt']);
+      }
+
+      allow read: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+      allow create: if signedIn() && validaNueva();
+      allow update: if isAdmin()
+        || (signedIn() && resource.data.uid == request.auth.uid && (aceptaContrato() || cancela()));
+      allow delete: if isAdmin();
+
+      // Pagos semanales (el id del documento es el número de semana)
+      match /pagos/{semana} {
+        function prestamo() { return get(/databases/$(database)/documents/solicitudes/$(sid)).data; }
+        // El cliente solo sube comprobantes "pendientes"; nunca puede confirmarlos ni tocar una semana ya confirmada.
+        function clienteSubeComprobante() {
+          let p = prestamo();
+          let d = request.resource.data;
+          return p.uid == request.auth.uid && p.estado == 'activo'
+            && d.uid == request.auth.uid
+            && d.estado == 'pendiente'
+            && d.semana is int && d.semana >= 1 && d.semana <= p.plazo && string(d.semana) == semana
+            && d.cuota == p.cuotaSemanal
+            && d.comprobanteURL is string
+            && d.uploadedAt == request.time
+            && d.keys().hasOnly(['semana','cuota','comprobanteURL','estado','uploadedAt','uid'])
+            && (resource == null || resource.data.estado != 'confirmado');
+        }
+
+        allow read: if isAdmin() || (signedIn() && prestamo().uid == request.auth.uid);
+        allow create, update: if isAdmin() || (signedIn() && clienteSubeComprobante());
+        allow delete: if isAdmin();
+      }
+    }
+  }
+}
