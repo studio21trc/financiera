@@ -27,6 +27,17 @@ service firebase.storage {
       allow create: if esDueno(uid) && imagenValida() && resource == null;
       allow delete: if isAdmin();
     }
+    // Documentación de garantía y firmas electrónicas
+    match /garantias/{uid}/{archivo} {
+      allow read: if isAdmin() || esDueno(uid);
+      allow create: if esDueno(uid) && imagenValida() && resource == null;
+      allow delete: if isAdmin();
+    }
+    match /firmas/{uid}/{archivo} {
+      allow read: if isAdmin() || esDueno(uid);
+      allow create: if esDueno(uid) && imagenValida() && request.resource.size < 2 * 1024 * 1024 && resource == null;
+      allow delete: if isAdmin();
+    }
     // Comprobantes de pago (ruta nueva: pagos/{uid}/{idPréstamo}/archivo)
     match /pagos/{uid}/{sid}/{archivo} {
       allow read: if isAdmin() || esDueno(uid);

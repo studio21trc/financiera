@@ -20,13 +20,37 @@ service cloud.firestore {
     // Perfil del cliente
     match /users/{uid} {
       allow read: if isAdmin() || (signedIn() && request.auth.uid == uid);
-      allow create, update: if signedIn() && request.auth.uid == uid
-        && request.resource.data.keys().hasOnly(['nombre','telefono','clabe','email','aceptoPrivacidad','createdAt']);
+      allow create, update: if isAdmin() || (signedIn() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['nombre','telefono','clabe','email','aceptoPrivacidad','createdAt',
+                                                 'tipoDeudor','razonSocial','origen']));
       allow delete: if isAdmin();
     }
 
     // Solicitudes / préstamos
+    // Estados: pendiente → aprobado → activo → liquidado   (solicitud en línea)
+    //          por_firmar → activo → liquidado              (cliente existente dado de alta por el admin)
     match /solicitudes/{sid} {
+
+      // Expediente: identificación (según su tipo), comprobante de domicilio y garantía
+      function expedienteValido(d) {
+        return d.domicilio is string && d.domicilio.size() >= 10 && d.domicilio.size() <= 300
+          && d.idTipo in ['INE','PASAPORTE','LICENCIA','CEDULA','MIGRATORIA']
+          && d.idURLs is list && d.idURLs.size() >= 1 && d.idURLs.size() <= 3
+          && d.credencialURL is string && d.comprobanteURL is string
+          && d.garantiaTipo is string && d.garantiaDesc is string && d.garantiaDesc.size() <= 300
+          && d.garantiaURLs is list && d.garantiaURLs.size() >= 1 && d.garantiaURLs.size() <= 5
+          && (!('rfc' in d) || (d.rfc is string && d.rfc.size() <= 18));
+      }
+      // Firma electrónica de los 3 documentos (aviso de privacidad, contrato y pagaré)
+      function firmaValida(d) {
+        return d.contratoAceptado == true
+          && d.firmaURL is string
+          && d.firmadoAt == request.time
+          && d.docsFirmados == ['privacidad','contrato','pagare']
+          && d.docsHash is string && d.docsHash.size() <= 64
+          && d.firmaUA is string && d.firmaUA.size() <= 300;
+      }
+      function camposFirma() { return ['estado','contratoAceptado','firmaURL','firmadoAt','docsFirmados','docsHash','firmaUA']; }
 
       // Nueva solicitud: siempre "pendiente" y con las condiciones vigentes (no se pueden alterar desde el navegador)
       function validaNueva() {
@@ -41,17 +65,36 @@ service cloud.firestore {
           && d.nombre is string && d.nombre.size() > 0 && d.nombre.size() <= 120
           && d.telefono is string && d.telefono.matches('^[0-9]{10}$')
           && d.clabe is string && d.clabe.matches('^[0-9]{18}$')
+          && d.tipoDeudor in ['fisica','moral']
+          && (d.tipoDeudor == 'fisica' || (d.razonSocial is string && d.razonSocial.size() >= 3 && d.razonSocial.size() <= 150))
+          && d.origen == 'web'
+          && expedienteValido(d)
           && d.keys().hasOnly(['uid','nombre','telefono','clabe','email','ref1Nombre','ref1Tel','ref2Nombre','ref2Tel',
                                'credencialURL','comprobanteURL','monto','cuotaSemanal','plazo','estado',
-                               'esPrimerPrestamo','contratoAceptado','createdAt']);
+                               'contratoAceptado','createdAt','origen','tipoDeudor','razonSocial','rfc','domicilio',
+                               'idTipo','idURLs','domTipo','garantiaTipo','garantiaDesc','garantiaURLs']);
       }
-      // El cliente solo puede: aceptar el contrato (aprobado → activo) …
+      // El cliente solo puede: firmar los documentos de su préstamo aprobado (aprobado → activo) …
       function aceptaContrato() {
         return resource.data.estado == 'aprobado'
           && request.resource.data.estado == 'activo'
-          && request.resource.data.contratoAceptado == true
+          && firmaValida(request.resource.data)
           && request.resource.data.fechaInicio == request.time
-          && soloCambia(['estado','contratoAceptado','fechaInicio','calendarioV']);
+          && soloCambia(camposFirma().concat(['fechaInicio','calendarioV']));
+      }
+      // … completar su expediente y firmar (cliente dado de alta por el admin: por_firmar → activo;
+      //   monto, pago, plazo y fecha de inicio los fija el admin y no se pueden cambiar) …
+      function completaYFirma() {
+        let d = request.resource.data;
+        return resource.data.estado == 'por_firmar'
+          && d.estado == 'activo'
+          && firmaValida(d)
+          && expedienteValido(d)
+          && d.telefono is string && d.telefono.matches('^[0-9]{10}$')
+          && d.clabe is string && d.clabe.matches('^[0-9]{18}$')
+          && soloCambia(camposFirma().concat(['telefono','clabe','ref1Nombre','ref1Tel','ref2Nombre','ref2Tel',
+               'rfc','domicilio','idTipo','idURLs','credencialURL','domTipo','comprobanteURL',
+               'garantiaTipo','garantiaDesc','garantiaURLs']));
       }
       // … o cancelar su solicitud mientras está pendiente.
       function cancela() {
@@ -61,9 +104,9 @@ service cloud.firestore {
       }
 
       allow read: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
-      allow create: if signedIn() && validaNueva();
+      allow create: if isAdmin() || (signedIn() && validaNueva());
       allow update: if isAdmin()
-        || (signedIn() && resource.data.uid == request.auth.uid && (aceptaContrato() || cancela()));
+        || (signedIn() && resource.data.uid == request.auth.uid && (aceptaContrato() || completaYFirma() || cancela()));
       allow delete: if isAdmin();
 
       // Pagos semanales (el id del documento es el número de semana)

@@ -492,6 +492,50 @@ td a{color:var(--gold3);font-weight:600}
 }
 @media(pointer:coarse){ .btn-sm{min-height:42px} }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+/* ---------- Expediente, documentos y firma ---------- */
+.sec-h{display:flex;align-items:center;gap:10px;margin:26px 0 6px;font-size:1rem;padding-top:18px;border-top:1px solid var(--line)}
+.sec-h .ico{width:20px;height:20px}
+.seg button{display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.resumen{margin:12px 0 0!important;padding:14px!important;background:var(--bg)!important;box-shadow:none!important}
+.pasos{list-style:none;display:flex;gap:6px;padding:0;margin:14px 0 6px;counter-reset:p}
+.pasos li{flex:1;counter-increment:p;font-size:.74rem;font-weight:600;color:var(--ink3);text-align:center;position:relative;padding-top:30px}
+.pasos li::before{content:counter(p);position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:1.5px solid var(--line2);font-size:.74rem}
+.pasos li.on{color:var(--ok)}.pasos li.on::before{content:"✓";background:var(--okBg);border-color:var(--ok);color:var(--ok)}
+.pasos li.cur{color:var(--ink)}.pasos li.cur::before{background:var(--n900);border-color:var(--n900);color:var(--gold2)}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:12px}
+.slot{display:flex;gap:12px;align-items:center;border:1.5px dashed var(--line2);border-radius:14px;padding:10px;background:var(--bg);transition:border-color .2s,background .2s}
+.slot.has{border-style:solid;border-color:rgba(20,145,90,.45);background:#fff}
+.slot-prev{flex:0 0 78px;height:78px;border-radius:10px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden;color:var(--ink3);position:relative}
+.slot-prev img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slot-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.slot-body b{font-size:.9rem}.slot-st{font-size:.78rem;color:var(--ink3);display:flex;align-items:center;gap:4px}
+.slot.has .slot-st{color:var(--ok);font-weight:600}.slot-st .ico{width:14px;height:14px}
+.slot-btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}.slot-btns .btn{margin:0;min-height:34px;padding:5px 10px;font-size:.78rem}
+.slot-btns .btn .ico{width:15px;height:15px}
+.upbar{height:6px;border-radius:99px;background:rgba(37,99,201,.15);margin-top:8px;overflow:hidden}
+.upbar span{display:block;height:100%;background:linear-gradient(90deg,var(--gold3),var(--gold2));transition:width .2s}
+.sumbox{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.sumbox div{background:var(--n900);color:#fff;border-radius:12px;padding:12px 14px}
+.sumbox span{display:block;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold2);font-weight:600}
+.sumbox b{font-family:var(--head);font-size:1.05rem}
+.docbox{border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:14px;background:#fff}
+.docbox-h{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.docbox-h b{display:block;font-family:var(--head);font-size:.95rem}.docbox-h small{color:var(--ink3);font-size:.78rem}
+.docnum{flex:0 0 34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--goldBg);color:var(--gold3);font-weight:700;font-family:var(--head)}
+.docscroll{max-height:440px;overflow:auto;border-radius:12px;background:var(--bg);padding:10px;-webkit-overflow-scrolling:touch}
+.docscroll:focus{outline:2px solid var(--gold)}
+.docbox .check{margin-top:12px}
+.fpad{position:relative;border:1.5px dashed var(--line2);border-radius:14px;background:#fff;height:190px;touch-action:none;overflow:hidden}
+.fpad.firmado{border-style:solid;border-color:var(--gold)}
+.fpad canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;touch-action:none}
+.pad-ph{position:absolute;left:18px;right:18px;bottom:38px;border-bottom:1px solid var(--line2);color:var(--ink3);font-size:.8rem;pointer-events:none;padding-bottom:4px}
+.fpad.firmado .pad-ph{color:transparent}
+.pad-act{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+#misDocs .lg-doc+.lg-salto+.lg-doc{margin-top:0}
+.formcard{max-width:880px;margin-left:auto;margin-right:auto}
+@media(min-width:900px){.formcard{padding:34px 40px}#expBox .grid2,#ctoBox .grid2{gap:20px}}
+@media(max-width:640px){.sumbox{grid-template-columns:1fr 1fr}.slots{grid-template-columns:1fr}.docscroll{max-height:60vh;padding:6px}.fpad{height:170px}.pasos li{font-size:.66rem}}
+
 @media print{nav.bar,.float-wa,.bottom-nav,.app-top,footer{display:none!important}body{background:#fff}}
 </style>
 </head>
@@ -637,7 +681,7 @@ td a{color:var(--gold3);font-weight:600}
         <div class="svc reveal"><div class="sic"><svg class="ico"><use href="#i-store"/></svg></div><h3>Préstamos comerciales</h3><p>Impulsa tu negocio con el capital que necesitas para crecer.</p><div class="from">Desde $20,000</div></div>
         <div class="svc reveal"><div class="sic"><svg class="ico"><use href="#i-car"/></svg></div><h3>Préstamos para auto</h3><p>Estrena o repara tu auto con planes cómodos y accesibles.</p><div class="from">Desde $15,000</div></div>
         <div class="svc reveal"><div class="sic"><svg class="ico"><use href="#i-users"/></svg></div><h3>Préstamos grupales</h3><p>Juntos alcanzan más: soluciones para grupos con grandes beneficios.</p><div class="from">Desde $10,000</div></div>
-        <div class="svc reveal"><div class="sic"><svg class="ico"><use href="#i-refresh"/></svg></div><h3>Renovación de crédito</h3><p>Al liquidar tu préstamo accedes a montos mayores de forma inmediata.</p><div class="from" id="svcMax">Hasta $50,000</div></div>
+        <div class="svc reveal"><div class="sic"><svg class="ico"><use href="#i-refresh"/></svg></div><h3>Renovación de crédito</h3><p>Al liquidar tu préstamo renuevas de forma inmediata, sin volver a empezar.</p><div class="from" id="svcMax">Hasta $50,000</div></div>
         <div class="svc reveal"><div class="sic"><svg class="ico"><use href="#i-headset"/></svg></div><h3>Asesoría personalizada</h3><p>Te orientamos para elegir el monto y plazo ideales para ti.</p><div class="from">Sin costo</div></div>
       </div>
     </div>
@@ -755,7 +799,7 @@ td a{color:var(--gold3);font-weight:600}
         <div class="req reveal"><div class="rc"><svg class="ico"><use href="#i-bank"/></svg></div><div><b>Cuenta CLABE</b><span>18 dígitos, para depositarte tu préstamo.</span></div></div>
         <div class="req reveal"><div class="rc"><svg class="ico"><use href="#i-users"/></svg></div><div><b>2 referencias</b><span>Nombre y teléfono de dos personas que te conozcan.</span></div></div>
         <div class="req reveal"><div class="rc"><svg class="ico"><use href="#i-check-circle"/></svg></div><div><b>Mayor de edad</b><span>Contar con 18 años cumplidos.</span></div></div>
-        <div class="req reveal"><div class="rc"><svg class="ico"><use href="#i-star"/></svg></div><div><b>Primera vez</b><span id="reqPrimera">Tu primer préstamo es de $5,000; al liquidarlo accedes a más.</span></div></div>
+        <div class="req reveal"><div class="rc"><svg class="ico"><use href="#i-shield"/></svg></div><div><b>Documentación de garantía</b><span>Factura de auto, escritura u otro documento que respalde tu préstamo.</span></div></div>
       </div>
     </div>
   </section>
@@ -771,7 +815,7 @@ td a{color:var(--gold3);font-weight:600}
       </div>
       <div class="faq reveal">
         <details><summary>¿Cuánto tarda la respuesta?</summary><p>Revisamos tu solicitud en menos de 24 horas. Verás el resultado directamente en tu cuenta, que se actualiza sola.</p></details>
-        <details><summary>¿Cuánto puedo pedir la primera vez?</summary><p id="faqPrimera">Tu primer préstamo es de $5,000. Al liquidarlo puntualmente puedes solicitar montos mayores.</p></details>
+        <details><summary>¿Cuánto puedo pedir?</summary><p id="faqPrimera">Desde $5,000 hasta $50,000 desde tu primera solicitud.</p></details>
         <details><summary>¿Cómo y cuándo pago?</summary><p id="faqPago">Pagas cada sábado durante 16 semanas. Haces tu depósito o transferencia y subes la foto o captura del comprobante en tu cuenta; nosotros lo confirmamos.</p></details>
         <details><summary>¿Qué pasa si me atraso?</summary><p>Tu cuenta mostrará las semanas vencidas. Escríbenos por WhatsApp lo antes posible para ayudarte a ponerte al corriente; el atraso puede generar intereses moratorios según tu contrato.</p></details>
         <details><summary>¿Mis datos están seguros?</summary><p>Sí. Tus documentos solo los ve el personal autorizado y se usan únicamente para evaluar y administrar tu préstamo, conforme a nuestro Aviso de Privacidad.</p></details>
@@ -932,11 +976,11 @@ td a{color:var(--gold3);font-weight:600}
 
 <!-- Textos legales. ⚠️ Plantilla base: revísala con tu abogado antes de publicarla. -->
 <template id="tpl-privacidad">
-  <p><b>Grupo Luján Financiera</b> (en adelante "el Responsable"), con domicilio en Torreón, Coahuila, México, es responsable del tratamiento de sus datos personales conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares.</p>
+  <p><b>Jesús Gerardo Luján Rodríguez</b>, quien opera comercialmente como <b>Grupo Luján Financiera</b> (en adelante "el Responsable"), con domicilio en Torreón, Coahuila, México, es responsable del tratamiento de sus datos personales conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares.</p>
   <h4>Datos que recabamos</h4>
   <ul><li>Identificación y contacto: nombre, teléfono y correo electrónico.</li>
   <li>Patrimoniales/financieros: cuenta CLABE para el depósito del préstamo y comprobantes de pago.</li>
-  <li>Documentos: imagen de su identificación oficial y comprobante de domicilio.</li>
+  <li>Documentos: imagen de su identificación oficial, comprobante de domicilio, documentación de garantía y firma electrónica.</li>
   <li>Datos de dos referencias personales (nombre y teléfono), que usted declara haber obtenido con su consentimiento.</li></ul>
   <h4>Finalidades</h4>
   <p>Evaluar su solicitud de crédito, verificar su identidad, formalizar el contrato, realizar el depósito del préstamo, administrar y confirmar sus pagos, y contactarle en relación con su préstamo. De manera secundaria, podremos enviarle ofertas de nuevos préstamos; si no lo desea, indíquelo por correo.</p>
@@ -951,8 +995,8 @@ td a{color:var(--gold3);font-weight:600}
   <p>Al usar este sitio y crear una cuenta, usted acepta los siguientes términos:</p>
   <ol>
     <li>Debe ser mayor de edad y proporcionar información verdadera. Proporcionar datos o documentos falsos es causa de rechazo o cancelación.</li>
-    <li>Enviar una solicitud no garantiza su aprobación. Grupo Luján Financiera puede aprobar o rechazar solicitudes a su criterio.</li>
-    <li>El préstamo se formaliza únicamente cuando usted acepta el contrato en la plataforma. Las condiciones (monto, pago semanal, plazo y total a pagar) se muestran antes de aceptar.</li>
+    <li>Enviar una solicitud no garantiza su aprobación. Jesús Gerardo Luján Rodríguez (Grupo Luján Financiera) puede aprobar o rechazar solicitudes a su criterio.</li>
+    <li>El préstamo se formaliza únicamente cuando usted firma en la plataforma el contrato, el pagaré y el aviso de privacidad, otorgados a favor de Jesús Gerardo Luján Rodríguez. Las condiciones (monto, pago semanal, plazo y total a pagar) se muestran antes de aceptar.</li>
     <li>Los pagos se tienen por realizados cuando el comprobante es confirmado por Grupo Luján Financiera.</li>
     <li>Usted es responsable de la confidencialidad de su contraseña.</li>
     <li>Los cálculos del simulador son ilustrativos.</li>
@@ -969,7 +1013,7 @@ window.CONFIG_LUJAN = {
   CIUDAD:          "Torreón, Coahuila",
   FACEBOOK_URL:    "",   // 👈 enlace de tu página de Facebook (vacío = se oculta el ícono)
   INSTAGRAM_URL:   "",   // 👈 enlace de tu Instagram
-  MONTO_MIN:5000, MONTO_MAX:50000, MONTO_PRIMERA_VEZ:5000, MONTO_PASO:1000,
+  MONTO_MIN:5000, MONTO_MAX:50000, MONTO_PASO:1000,
   PLAZO_SEMANAS:16, FACTOR_SEMANAL:0.10,
   EMPRESA:"GRUPO LUJÁN FINANCIERA", EMPRESA_LEMA:"Tu Aliado Financiero",
   /* 👇 Datos donde el cliente deposita sus pagos semanales.
@@ -1001,8 +1045,7 @@ window.ico = function(n, c){ return '<svg class="ico '+(c||'')+'" aria-hidden="t
   $('#anio').textContent = new Date().getFullYear();
 
   // Textos que dependen de la configuración
-  var primera = "Tu primer préstamo es de " + money(C.MONTO_PRIMERA_VEZ) + "; al liquidarlo accedes a montos de hasta " + money(C.MONTO_MAX) + ".";
-  $('#reqPrimera').textContent = primera; $('#faqPrimera').textContent = primera;
+  $('#faqPrimera').textContent = "Desde tu primera solicitud puedes pedir de " + money(C.MONTO_MIN) + " hasta " + money(C.MONTO_MAX) + ". El monto final se autoriza según tu documentación y garantía.";
   $('#svcMax').textContent = "Hasta " + money(C.MONTO_MAX);
   $('#whyPlazo').textContent = C.PLAZO_SEMANAS + " semanas";
   $('#heroCuota').textContent = money(Math.round(C.MONTO_MIN * C.FACTOR_SEMANAL));
@@ -1021,9 +1064,7 @@ window.ico = function(n, c){ return '<svg class="ico '+(c||'')+'" aria-hidden="t
     r.style.setProperty('--p', ((m - C.MONTO_MIN) / (C.MONTO_MAX - C.MONTO_MIN) * 100) + '%');
     $('#simMonto').textContent = money(m); $('#simCuota').textContent = money(cuota);
     $('#simTotal').textContent = money(cuota * C.PLAZO_SEMANAS);
-    $('#simNota').textContent = m > C.MONTO_PRIMERA_VEZ
-      ? "Montos mayores a " + money(C.MONTO_PRIMERA_VEZ) + " están disponibles al liquidar tu primer préstamo."
-      : "Monto disponible desde tu primera solicitud.";
+    $('#simNota').textContent = "Monto sujeto a autorización. Cálculo ilustrativo: el contrato muestra las condiciones exactas antes de firmar.";
     document.querySelectorAll('#simChips button').forEach(function(b){ b.classList.toggle('on', +b.getAttribute('data-v')===m); });
   }
   r.addEventListener('input', sim); sim();
@@ -1107,6 +1148,7 @@ window.ico = function(n, c){ return '<svg class="ico '+(c||'')+'" aria-hidden="t
 })();
 </script>
 
+<script src="legal.js"></script>
 <!-- ================= FIREBASE + LÓGICA ================= -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -1115,7 +1157,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, se
          onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, collection, doc, setDoc, getDoc, addDoc, updateDoc,
          query, where, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
 const CONFIG = window.CONFIG_LUJAN;
 const ico = window.ico;
@@ -1134,6 +1176,7 @@ const auth = getAuth(app);
 auth.languageCode = "es";
 const db = getFirestore(app);
 const storage = getStorage(app);
+storage.maxUploadRetryTime = 60000; storage.maxOperationRetryTime = 30000;
 
 /* ===================== Utilidades ===================== */
 const $ = s => document.querySelector(s);
@@ -1155,6 +1198,8 @@ function copiar(btn, texto){
 }
 function bindCopy(root){ root.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",()=>copiar(b,b.dataset.copy))); }
 
+const conTiempo = (p, ms=30000) => Promise.race([p, new Promise((_,rej)=>setTimeout(()=>rej({code:"lujan/lento"}), ms))]);
+
 /* ===== Navegación entre landing y app ===== */
 function show(view){
   ["landing","auth","dash"].forEach(v=>$("#view-"+v).classList.toggle("hidden", v!==view));
@@ -1166,25 +1211,45 @@ function openApp(){ show(auth.currentUser ? "dash" : "auth"); }
 document.querySelectorAll("[data-app]").forEach(b=>b.addEventListener("click", openApp));
 document.querySelectorAll("[data-landing]").forEach(b=>b.addEventListener("click", ()=>show("landing")));
 
-/* ===== Imagen: comprimir antes de subir ===== */
-function compressImage(file, maxDim=1600, quality=0.82){
-  return new Promise((resolve,reject)=>{
-    const img=new Image(); const url=URL.createObjectURL(file);
-    img.onload=()=>{ let {width:w,height:h}=img;
-      if(w>maxDim||h>maxDim){ const r=Math.min(maxDim/w,maxDim/h); w=Math.round(w*r); h=Math.round(h*r); }
-      const c=document.createElement("canvas"); c.width=w; c.height=h; c.getContext("2d").drawImage(img,0,0,w,h);
-      URL.revokeObjectURL(url); c.toBlob(b=> b?resolve(b):reject(new Error("No se pudo procesar la imagen")),"image/jpeg",quality); };
-    img.onerror=()=>{ URL.revokeObjectURL(url); reject(new Error("No se pudo leer la imagen. Usa una foto JPG o PNG.")); }; img.src=url;
-  });
+/* ===== Imágenes: se comprimen en cuanto se eligen y se suben todas a la vez ===== */
+async function compressImage(file, maxDim=1400, quality=0.78){
+  let src, w, h, cerrar=()=>{};
+  try{ src = await createImageBitmap(file); w=src.width; h=src.height; cerrar=()=>src.close&&src.close(); }
+  catch(e){
+    src = await new Promise((res,rej)=>{ const img=new Image(); const u=URL.createObjectURL(file);
+      img.onload=()=>{ URL.revokeObjectURL(u); res(img); };
+      img.onerror=()=>{ URL.revokeObjectURL(u); rej(new Error("No se pudo leer la imagen. Usa una foto JPG o PNG.")); }; img.src=u; });
+    w=src.naturalWidth; h=src.naturalHeight;
+  }
+  if(w>maxDim||h>maxDim){ const r=Math.min(maxDim/w,maxDim/h); w=Math.round(w*r); h=Math.round(h*r); }
+  const c=document.createElement("canvas"); c.width=w; c.height=h;
+  const x=c.getContext("2d"); x.fillStyle="#fff"; x.fillRect(0,0,w,h); x.drawImage(src,0,0,w,h); cerrar();
+  return await new Promise((res,rej)=> c.toBlob(b=> b?res(b):rej(new Error("No se pudo procesar la imagen")),"image/jpeg",quality));
 }
 function validarImagen(f){
   if(!f) return "Selecciona una imagen.";
   if(f.type && !f.type.startsWith("image/")) return "El archivo debe ser una imagen (foto o captura).";
-  if(f.size > 20*1024*1024) return "La imagen es demasiado grande (máx. 20 MB).";
+  if(f.size > 25*1024*1024) return "La imagen es demasiado grande (máx. 25 MB).";
   return "";
 }
-async function subirImagen(path, file){ const blob=await compressImage(file); const r=ref(storage,path);
-  await uploadBytes(r,blob,{contentType:"image/jpeg"}); return await getDownloadURL(r); }
+/* items: [{path, blob: Blob|Promise<Blob>}] → URLs en el mismo orden. Sube en paralelo y reporta el avance (0–1). */
+async function subirArchivos(items, onProg=()=>{}){
+  const blobs = await Promise.all(items.map(i=>i.blob));
+  const total = blobs.reduce((a,b)=>a+b.size,0) || 1; const hecho = new Array(blobs.length).fill(0);
+  onProg(0);
+  return Promise.all(items.map((it,i)=> new Promise((res,rej)=>{
+    const r=ref(storage,it.path);
+    const task=uploadBytesResumable(r, blobs[i], {contentType: blobs[i].type || "image/jpeg"});
+    // Si la subida no avanza en 45 s se cancela y se muestra un error claro (en lugar de quedarse cargando).
+    let ultimo=Date.now(), atorada=false;
+    const vigila=setInterval(()=>{ if(Date.now()-ultimo>45000){ atorada=true; clearInterval(vigila); task.cancel(); } }, 3000);
+    task.on("state_changed", sn=>{ ultimo=Date.now(); hecho[i]=sn.bytesTransferred; onProg(hecho.reduce((a,b)=>a+b,0)/total); },
+      e=>{ clearInterval(vigila); rej(atorada ? {code:"lujan/atorada"} : e); },
+      ()=>{ clearInterval(vigila); getDownloadURL(r).then(res,rej); });
+  })));
+}
+async function subirImagen(path, file){ const [u]=await subirArchivos([{path, blob:compressImage(file)}]); return u; }
+const barra = (txt, p) => `<span class="loader"></span> ${txt} <b>${Math.round(p*100)}%</b><div class="upbar"><span style="width:${Math.round(p*100)}%"></span></div>`;
 
 /* ===== Calendario de pagos =====
    calendarioV 2: el primer pago es el primer sábado DESPUÉS del inicio (si se activa en sábado, el siguiente).
@@ -1261,8 +1326,18 @@ function traducirError(e){ const m={
   "auth/user-not-found":"No existe una cuenta con ese correo.","auth/wrong-password":"Contraseña incorrecta.",
   "auth/invalid-credential":"Correo o contraseña incorrectos.","auth/too-many-requests":"Demasiados intentos. Espera un momento.",
   "auth/network-request-failed":"Sin conexión. Revisa tu internet e inténtalo de nuevo.",
-  "permission-denied":"No tienes permiso para esta acción. Si el problema continúa, contáctanos."};
-  return m[e.code] || ("Error: "+errTxt(e)); }
+  "permission-denied":"No tienes permiso para esta acción. Si el problema continúa, contáctanos.",
+  "storage/unauthorized":"El servidor rechazó la foto (permiso de almacenamiento). Avísanos por WhatsApp para ayudarte.",
+  "storage/unauthenticated":"Tu sesión expiró. Vuelve a iniciar sesión.",
+  "storage/retry-limit-exceeded":"La conexión es muy lenta y no se pudieron subir las fotos. Inténtalo de nuevo con mejor señal o Wi-Fi.",
+  "storage/bucket-not-found":"El almacenamiento de documentos no está activado. Avísanos por WhatsApp.",
+  "storage/project-not-found":"El almacenamiento de documentos no está activado. Avísanos por WhatsApp.",
+  "storage/quota-exceeded":"Se alcanzó el límite de almacenamiento. Avísanos por WhatsApp.",
+  "storage/canceled":"La subida se canceló. Inténtalo de nuevo.",
+  "lujan/atorada":"La subida de fotos no avanzó (conexión inestable o almacenamiento no disponible). Revisa tu internet e inténtalo de nuevo; si continúa, avísanos por WhatsApp.",
+  "lujan/lento":"El servidor tardó demasiado en responder. Revisa tu internet e inténtalo de nuevo.",
+  "unavailable":"Sin conexión con el servidor. Revisa tu internet e inténtalo de nuevo."};
+  return m[e && e.code] || ("Error: "+errTxt(e)); }
 
 /* ===== Estado de sesión ===== */
 let unsubSolic=null, unsubPagos=null, userData=null;
@@ -1292,7 +1367,7 @@ function escucharSolicitud(user){
     const docs=[]; snap.forEach(d=>docs.push({id:d.id, ...d.data()}));
     const seg = d => (d.createdAt && d.createdAt.seconds) || Number.MAX_SAFE_INTEGER; // escritura local aún sin hora del servidor = la más reciente
     docs.sort((a,b)=>seg(b)-seg(a));
-    const vigente = docs.find(d=>["pendiente","aprobado","activo"].includes(d.estado));
+    const vigente = docs.find(d=>["pendiente","aprobado","por_firmar","activo"].includes(d.estado));
     if(unsubPagos && (!vigente || vigente.estado!=="activo")){ unsubPagos(); unsubPagos=null; }
     if(vigente) renderSolicitud(vigente, docs); else renderFormulario(docs);
   }, err=>{
@@ -1301,7 +1376,7 @@ function escucharSolicitud(user){
 }
 
 /* ===== Historial del cliente ===== */
-const ETIQUETA = {pendiente:"En revisión", aprobado:"Aprobado", activo:"Activo", liquidado:"Liquidado ✓", rechazado:"Rechazado", cancelado:"Cancelado"};
+const ETIQUETA = {pendiente:"En revisión", aprobado:"Aprobado", por_firmar:"Por firmar", activo:"Activo", liquidado:"Liquidado ✓", rechazado:"Rechazado", cancelado:"Cancelado"};
 function historialHTML(docs){
   const h = docs.filter(d=>["liquidado","rechazado","cancelado"].includes(d.estado));
   if(!h.length) return "";
@@ -1313,65 +1388,174 @@ function historialHTML(docs){
     </table></div></details>`;
 }
 
+/* ===== Expediente: identificación, domicilio y garantía (con el tipo de documento) ===== */
+const L = window.LEGAL;
+const opcionesDe = (obj, sel) => Object.entries(obj).map(([k,v])=>`<option value="${k}" ${k===sel?"selected":""}>${esc(typeof v==="string"?v:v.nombre)}</option>`).join("");
+function slotHTML(key, label, opcional){
+  return `<div class="slot" data-slot="${key}">
+    <div class="slot-prev">${ico("camera")}<img class="hidden" alt="Vista previa: ${esc(label)}"></div>
+    <div class="slot-body"><b>${esc(label)}${opcional?' <small class="muted">(opcional)</small>':""}</b><span class="slot-st">Sin foto</span>
+      <div class="slot-btns">
+        <label class="btn btn-outline btn-sm">${ico("upload")}<span>Galería</span><input type="file" accept="image/*" class="hidden"></label>
+        <label class="btn btn-outline btn-sm">${ico("camera")}<span>Cámara</span><input type="file" accept="image/*" capture="environment" class="hidden"></label>
+      </div></div></div>`;
+}
+/* opts: {tipoDeudor (fijo) | null para elegir, razonSocial} */
+function expedienteHTML(pre, opts={}){
+  const elegir = !opts.tipoFijo;
+  const moral = (opts.tipoFijo || pre.tipoDeudor) === "moral";
+  return `
+    ${elegir ? `<label>¿A nombre de quién será el préstamo?</label>
+      <div class="seg" id="segTipo" role="tablist">
+        <button type="button" data-t="fisica" class="${moral?"":"active"}">${ico("user")} Persona física</button>
+        <button type="button" data-t="moral" class="${moral?"active":""}">${ico("store")} Empresa</button></div>
+      <div id="boxMoral" class="${moral?"":"hidden"}"><label for="fRazon">Razón social de la empresa</label>
+        <input id="fRazon" type="text" maxlength="150" value="${esc(pre.razonSocial||"")}" placeholder="Ej. Comercializadora del Norte, S.A. de C.V." /></div>`
+      : (moral ? `<div class="kv"><span>Empresa (deudor)</span><b>${esc(pre.razonSocial)}</b></div>` : "")}
+    <label for="fRfc">RFC o CURP <small class="muted">(opcional)</small></label>
+    <input id="fRfc" type="text" maxlength="18" value="${esc(pre.rfc||"")}" placeholder="${moral?"RFC de la empresa":"RFC o CURP"}" autocomplete="off" style="text-transform:uppercase" />
+    <label for="fDomicilio">Domicilio completo ${moral?"de la empresa":""}</label>
+    <textarea id="fDomicilio" rows="2" maxlength="300" style="min-height:76px" placeholder="Calle, número, colonia, código postal y ciudad">${esc(pre.domicilio||"")}</textarea>
+
+    <h3 class="gold sec-h">${ico("id")} Identificación oficial ${moral?"del representante legal":""}</h3>
+    <label for="fIdTipo">¿Qué identificación vas a presentar?</label>
+    <select id="fIdTipo">${opcionesDe(L.TIPOS_ID, pre.idTipo||"INE")}</select>
+    <div id="slotsId" class="slots"></div>
+
+    <h3 class="gold sec-h">${ico("home")} Comprobante de domicilio</h3>
+    <label for="fDomTipo">Tipo de comprobante (no mayor a 3 meses)</label>
+    <select id="fDomTipo">${opcionesDe(L.TIPOS_DOM, pre.domTipo||"CFE")}</select>
+    <div id="slotsDom" class="slots"></div>
+
+    <h3 class="gold sec-h">${ico("shield")} Documentación de garantía</h3>
+    <p class="hint" style="margin-top:0">Documento que respalda tu préstamo (por ejemplo, la factura de tu auto o la escritura de tu casa). Solo se guarda una copia digital; el original se queda contigo.</p>
+    <label for="fGarTipo">¿Qué documento de garantía presentas?</label>
+    <select id="fGarTipo">${opcionesDe(L.TIPOS_GAR, pre.garantiaTipo||"FACTURA_AUTO")}</select>
+    <label for="fGarDesc">Descripción del bien o documento</label>
+    <input id="fGarDesc" type="text" maxlength="300" value="${esc(pre.garantiaDesc||"")}" placeholder="Ej. Nissan Versa 2019, placas ABC-123, factura no. 4567" />
+    <div id="slotsGar" class="slots"></div>`;
+}
+function bindExpediente(root, pre, opts={}){
+  const st = { tipo: opts.tipoFijo || pre.tipoDeudor || "fisica", files:{} };
+  const errEl = opts.errEl;
+  function pintar(contId, prefix, labels, minReq){
+    Object.keys(st.files).filter(k=>k.startsWith(prefix+"_")).forEach(k=>delete st.files[k]);
+    const cont=root.querySelector("#"+contId);
+    cont.innerHTML = labels.map((l,i)=>slotHTML(prefix+"_"+i, l, i>=minReq)).join("");
+    cont.querySelectorAll(".slot").forEach(sl=>{
+      const key=sl.dataset.slot;
+      sl.querySelectorAll("input[type=file]").forEach(inp=> inp.addEventListener("change", ()=>{
+        const f=inp.files[0]; inp.value=""; if(!f) return;
+        const e=validarImagen(f); if(e){ if(errEl) msg(errEl,e,"err"); return; }
+        if(errEl) msg(errEl,"");
+        const img=sl.querySelector("img"); if(img.src.startsWith("blob:")) URL.revokeObjectURL(img.src);
+        img.src=URL.createObjectURL(f); img.classList.remove("hidden"); sl.classList.add("has");
+        const stEl=sl.querySelector(".slot-st"); stEl.textContent="Preparando…";
+        const p = compressImage(f); st.files[key]={blob:p};
+        p.then(b=>{ if(st.files[key]&&st.files[key].blob===p) stEl.innerHTML=`${ico("check")} Lista · ${Math.max(1,Math.round(b.size/1024))} KB`; })
+         .catch(er=>{ delete st.files[key]; sl.classList.remove("has"); img.classList.add("hidden"); stEl.textContent="Sin foto"; if(errEl) msg(errEl,errTxt(er),"err"); });
+      }));
+    });
+  }
+  const pintaId = ()=> pintar("slotsId","id", L.TIPOS_ID[root.querySelector("#fIdTipo").value].fotos, 99);
+  const pintaGar= ()=> pintar("slotsGar","gar", L.TIPOS_GAR[root.querySelector("#fGarTipo").value].fotos, 1);
+  root.querySelector("#fIdTipo").addEventListener("change", pintaId);
+  root.querySelector("#fGarTipo").addEventListener("change", pintaGar);
+  pintaId(); pintar("slotsDom","dom",["Comprobante (hoja completa)"],1); pintaGar();
+  const seg=root.querySelector("#segTipo");
+  if(seg) seg.addEventListener("click", e=>{ const b=e.target.closest("button[data-t]"); if(!b) return;
+    st.tipo=b.dataset.t; seg.querySelectorAll("button").forEach(x=>x.classList.toggle("active", x===b));
+    root.querySelector("#boxMoral").classList.toggle("hidden", st.tipo!=="moral");
+    const lbl=document.querySelector("label[for=fNombre]"); if(lbl) lbl.textContent = st.tipo==="moral" ? "Nombre completo del representante legal" : "Nombre completo"; });
+
+  /* Valida y devuelve {error} o {datos, archivos} (las fotos todavía no se suben) */
+  st.leer = ()=>{
+    const v=id=>{ const e=root.querySelector("#"+id); return e?e.value.trim():""; };
+    const datos = { domicilio:v("fDomicilio"), rfc:v("fRfc").toUpperCase(), idTipo:v("fIdTipo"), domTipo:v("fDomTipo"),
+                    garantiaTipo:v("fGarTipo"), garantiaDesc:v("fGarDesc") };
+    if(!opts.tipoFijo){ datos.tipoDeudor=st.tipo; datos.razonSocial = st.tipo==="moral" ? v("fRazon") : ""; }
+    if(datos.tipoDeudor==="moral" && datos.razonSocial.length<3) return {error:"Escribe la razón social de la empresa."};
+    if(datos.rfc && !/^[A-ZÑ&0-9]{10,18}$/.test(datos.rfc)) return {error:"El RFC/CURP solo lleva letras y números (10 a 18 caracteres)."};
+    if(datos.domicilio.length<10) return {error:"Escribe tu domicilio completo (calle, número, colonia, C.P. y ciudad)."};
+    const fotosId=L.TIPOS_ID[datos.idTipo].fotos;
+    for(let i=0;i<fotosId.length;i++) if(!st.files["id_"+i]) return {error:`Sube la foto de tu identificación: ${fotosId[i].toLowerCase()}.`};
+    if(!st.files.dom_0) return {error:"Sube la foto de tu comprobante de domicilio."};
+    if(datos.garantiaDesc.length<3) return {error:"Describe brevemente tu documento de garantía."};
+    if(!st.files.gar_0) return {error:"Sube al menos una foto de tu documentación de garantía."};
+    return { datos, nId:fotosId.length,
+      gar: Object.keys(st.files).filter(k=>k.startsWith("gar_")).sort() };
+  };
+  /* Sube todas las fotos en paralelo y devuelve los campos con las URLs */
+  st.subir = async (uid, onProg)=>{
+    const r=st.leer(); if(r.error) throw new Error(r.error);
+    const ts=Date.now(), items=[];
+    for(let i=0;i<r.nId;i++) items.push({path:`credenciales/${uid}/${ts}_id${i}.jpg`, blob:st.files["id_"+i].blob});
+    items.push({path:`domicilio/${uid}/${ts}_dom.jpg`, blob:st.files.dom_0.blob});
+    r.gar.forEach((k,i)=> items.push({path:`garantias/${uid}/${ts}_g${i}.jpg`, blob:st.files[k].blob}));
+    const urls = await subirArchivos(items, onProg);
+    const idURLs=urls.slice(0,r.nId);
+    return { ...r.datos, idURLs, credencialURL:idURLs[0], comprobanteURL:urls[r.nId], garantiaURLs:urls.slice(r.nId+1) };
+  };
+  return st;
+}
+
+/* ===== Datos de contacto, CLABE y referencias ===== */
+function contactoFormHTML(pre){
+  return `
+    <label for="fTel">Número de teléfono (10 dígitos)</label>
+    <input id="fTel" type="tel" inputmode="numeric" value="${esc(pre.telefono||"")}" placeholder="871 123 4567" autocomplete="tel-national" />
+    <label for="fClabe">Cuenta CLABE (18 dígitos)</label>
+    <input id="fClabe" type="text" inputmode="numeric" maxlength="18" value="${esc(pre.clabe||"")}" placeholder="18 dígitos de tu CLABE interbancaria" autocomplete="off" />
+    <h3 class="gold sec-h">${ico("users")} Referencias</h3>
+    <p class="hint" style="margin-top:0">Personas que te conozcan (no tú mismo). Pídeles permiso antes de darnos sus datos.</p>
+    <div class="grid2">
+      <div><label for="r1n">Referencia 1 — Nombre</label><input id="r1n" type="text" value="${esc(pre.ref1Nombre||"")}" placeholder="Nombre completo" />
+        <label for="r1t">Referencia 1 — Teléfono</label><input id="r1t" type="tel" inputmode="numeric" value="${esc(pre.ref1Tel||"")}" placeholder="10 dígitos" /></div>
+      <div><label for="r2n">Referencia 2 — Nombre</label><input id="r2n" type="text" value="${esc(pre.ref2Nombre||"")}" placeholder="Nombre completo" />
+        <label for="r2t">Referencia 2 — Teléfono</label><input id="r2t" type="tel" inputmode="numeric" value="${esc(pre.ref2Tel||"")}" placeholder="10 dígitos" /></div>
+    </div>`;
+}
+function leerContacto(){
+  const tel=soloDigitos($("#fTel").value), clabe=soloDigitos($("#fClabe").value);
+  const r1n=$("#r1n").value.trim(), r1t=soloDigitos($("#r1t").value), r2n=$("#r2n").value.trim(), r2t=soloDigitos($("#r2t").value);
+  if(!telValido(tel)) return {error:"Tu teléfono debe tener 10 dígitos."};
+  if(!clabeValida(clabe)) return {error:"Ingresa una cuenta CLABE válida de 18 dígitos."};
+  if(!r1n||!r2n) return {error:"Escribe el nombre de tus 2 referencias."};
+  if(!telValido(r1t)||!telValido(r2t)) return {error:"Los teléfonos de tus referencias deben tener 10 dígitos."};
+  if(r1t===tel||r2t===tel) return {error:"Los teléfonos de tus referencias deben ser distintos al tuyo."};
+  if(r1t===r2t) return {error:"Las 2 referencias deben tener teléfonos distintos."};
+  return { datos:{ telefono:tel, clabe, ref1Nombre:r1n, ref1Tel:r1t, ref2Nombre:r2n, ref2Tel:r2t } };
+}
+
 /* ===== Formulario de solicitud ===== */
 function renderFormulario(historial){
-  const yaTuvo = historial.some(d=>["aprobado","activo","liquidado"].includes(d.estado));
-  const primeraVez = !yaTuvo;
-  const maxMonto = primeraVez ? CONFIG.MONTO_PRIMERA_VEZ : CONFIG.MONTO_MAX;
-  let opts=""; for(let m=CONFIG.MONTO_MIN;m<=maxMonto;m+=CONFIG.MONTO_PASO){ opts+=`<option value="${m}">${money(m)} — pago semanal ${money(cuotaDe(m))}</option>`; }
+  let opts=""; for(let m=CONFIG.MONTO_MIN;m<=CONFIG.MONTO_MAX;m+=CONFIG.MONTO_PASO){ opts+=`<option value="${m}" ${m===10000?"selected":""}>${money(m)} — pago semanal ${money(cuotaDe(m))}</option>`; }
   const ultima = historial[0];
-  const avisoLiquidado = historial.some(d=>d.estado==="liquidado") ? `<div class="msg ok">${ico("award")}<span>¡Felicidades! Ya liquidaste un préstamo anterior. Puedes solicitar uno nuevo de hasta ${money(CONFIG.MONTO_MAX)}.</span></div>` : "";
+  const avisoLiquidado = historial.some(d=>d.estado==="liquidado") ? `<div class="msg ok">${ico("award")}<span>¡Gracias por liquidar tu préstamo anterior! Puedes solicitar uno nuevo cuando quieras.</span></div>` : "";
   const avisoRechazo = ultima && ultima.estado==="rechazado"
     ? `<div class="msg warn">Tu solicitud anterior no fue aprobada${ultima.motivoRechazo?`: <b>${esc(ultima.motivoRechazo)}</b>`:"."} Puedes corregir tus datos y volver a solicitar.</div>` : "";
+  const pre = {...userData, ...(ultima||{})};
 
   $("#dashBody").innerHTML = `
-    <div class="card">
+    <div class="card formcard">
       <h2 style="margin-top:0">Solicita tu préstamo</h2>
       ${avisoLiquidado}${avisoRechazo}
-      ${primeraVez ? `<div class="msg info">${ico("info")}<span>Es tu <b>primera solicitud</b>. Por política, el primer préstamo es de <b>${money(CONFIG.MONTO_PRIMERA_VEZ)}</b>. Al liquidarlo podrás solicitar montos mayores (hasta ${money(CONFIG.MONTO_MAX)}).</span></div>` : ""}
-      <label for="fNombre">Nombre completo</label>
-      <input id="fNombre" type="text" value="${esc(userData.nombre)}" placeholder="Nombre y apellidos" autocomplete="name" />
-      <label for="fTel">Número de teléfono (10 dígitos)</label>
-      <input id="fTel" type="tel" inputmode="numeric" value="${esc(userData.telefono)}" placeholder="871 123 4567" autocomplete="tel-national" />
-      <label for="fClabe">Cuenta CLABE (18 dígitos) — donde recibirás el depósito</label>
-      <input id="fClabe" type="text" inputmode="numeric" maxlength="18" value="${esc(userData.clabe)}" placeholder="18 dígitos de tu CLABE interbancaria" autocomplete="off" />
-      <h3 class="gold" style="margin-top:22px">Referencias</h3>
-      <p class="hint" style="margin-top:0">Personas que te conozcan (no tú mismo). Pídeles permiso antes de darnos sus datos.</p>
-      <div class="grid2">
-        <div><label for="r1n">Referencia 1 — Nombre</label><input id="r1n" type="text" placeholder="Nombre completo" />
-          <label for="r1t">Referencia 1 — Teléfono</label><input id="r1t" type="tel" inputmode="numeric" placeholder="10 dígitos" /></div>
-        <div><label for="r2n">Referencia 2 — Nombre</label><input id="r2n" type="text" placeholder="Nombre completo" />
-          <label for="r2t">Referencia 2 — Teléfono</label><input id="r2t" type="tel" inputmode="numeric" placeholder="10 dígitos" /></div>
-      </div>
-      <h3 class="gold" style="margin-top:22px">Documentos</h3>
-      <label>Foto de tu credencial / identificación (INE, pasaporte, etc.)</label>
-      <div class="filecap">
-        <label class="fake">${ico("upload")}<span>Elegir de galería</span><input id="fCred" type="file" accept="image/*" class="hidden"></label>
-        <label class="fake">${ico("camera")}<span>Tomar foto</span><input id="fCredCam" type="file" accept="image/*" capture="environment" class="hidden"></label>
-      </div>
-      <img id="prevCred" class="thumb hidden" style="margin-top:10px" alt="Vista previa de identificación" />
-      <label style="margin-top:14px">Comprobante de domicilio</label>
-      <div class="filecap">
-        <label class="fake">${ico("upload")}<span>Elegir de galería</span><input id="fDom" type="file" accept="image/*" class="hidden"></label>
-        <label class="fake">${ico("camera")}<span>Tomar foto</span><input id="fDomCam" type="file" accept="image/*" capture="environment" class="hidden"></label>
-      </div>
-      <img id="prevDom" class="thumb hidden" style="margin-top:10px" alt="Vista previa de comprobante" />
-      <h3 class="gold" style="margin-top:22px">Monto a solicitar</h3>
+      <ol class="pasos"><li class="cur">Datos y documentos</li><li>Autorización</li><li>Firma</li></ol>
+      <h3 class="gold sec-h">${ico("wallet")} Monto a solicitar</h3>
       <select id="fMonto" aria-label="Monto a solicitar">${opts}</select>
-      <div class="card" style="margin:12px 0 0;padding:14px" id="resumenMonto"></div>
+      <div class="card resumen" id="resumenMonto"></div>
+      <h3 class="gold sec-h">${ico("user")} Datos del solicitante</h3>
+      <label for="fNombre">${pre.tipoDeudor==="moral"?"Nombre completo del representante legal":"Nombre completo"}</label>
+      <input id="fNombre" type="text" value="${esc(pre.nombre)}" placeholder="Nombre y apellidos" autocomplete="name" />
+      <div id="expBox">${expedienteHTML(pre)}</div>
+      <div id="ctoBox">${contactoFormHTML(pre)}</div>
       <div id="formMsg"></div>
       <button id="btnEnviar" class="btn btn-gold btn-block btn-lg" style="margin-top:16px">Enviar solicitud</button>
-      <p class="hint center">Al enviar, tu solicitud queda <b>en espera</b> de autorización. Te responderemos en menos de 24 horas.</p>
+      <p class="hint center">Al enviar, tu solicitud queda <b>en espera</b> de autorización. Si se aprueba, firmarás en línea el contrato, el pagaré y el aviso de privacidad.</p>
     </div>
     ${historialHTML(historial)}`;
 
-  let credFile=null, domFile=null;
-  const bindPrev=(inputId,prevId,setter)=>{ $("#"+inputId).addEventListener("change", e=>{ const f=e.target.files[0]; if(!f) return;
-    const err=validarImagen(f); if(err){ e.target.value=""; return msg($("#formMsg"),err,"err"); }
-    setter(f); msg($("#formMsg"),""); const p=$("#"+prevId); if(p.src.startsWith("blob:")) URL.revokeObjectURL(p.src);
-    p.src=URL.createObjectURL(f); p.classList.remove("hidden"); }); };
-  bindPrev("fCred","prevCred",f=>credFile=f); bindPrev("fCredCam","prevCred",f=>credFile=f);
-  bindPrev("fDom","prevDom",f=>domFile=f); bindPrev("fDomCam","prevDom",f=>domFile=f);
+  const exp = bindExpediente($("#expBox"), pre, {errEl: $("#formMsg")});
   $("#fClabe").addEventListener("input", e=>{ e.target.value = soloDigitos(e.target.value).slice(0,18); });
   const actualizarResumen=()=>{ const m=+$("#fMonto").value, c=cuotaDe(m);
     $("#resumenMonto").innerHTML=`<div class="kv"><span>Pago semanal</span><b>${money(c)}</b></div>
@@ -1380,44 +1564,31 @@ function renderFormulario(historial){
   $("#fMonto").addEventListener("change",actualizarResumen); actualizarResumen();
 
   $("#btnEnviar").addEventListener("click", async ()=>{
-    const nombre=$("#fNombre").value.trim(), tel=soloDigitos($("#fTel").value);
-    const clabe=soloDigitos($("#fClabe").value);
-    const r1n=$("#r1n").value.trim(), r1t=soloDigitos($("#r1t").value), r2n=$("#r2n").value.trim(), r2t=soloDigitos($("#r2t").value);
-    const monto=+$("#fMonto").value;
-    if(nombre.length<5 || !nombre.includes(" ")) return msg($("#formMsg"),"Escribe tu nombre completo (nombre y apellidos).","err");
-    if(!telValido(tel)) return msg($("#formMsg"),"Tu teléfono debe tener 10 dígitos.","err");
-    if(!clabeValida(clabe)) return msg($("#formMsg"),"Ingresa una cuenta CLABE válida de 18 dígitos.","err");
-    if(!r1n||!r2n) return msg($("#formMsg"),"Escribe el nombre de tus 2 referencias.","err");
-    if(!telValido(r1t)||!telValido(r2t)) return msg($("#formMsg"),"Los teléfonos de tus referencias deben tener 10 dígitos.","err");
-    if(r1t===tel||r2t===tel) return msg($("#formMsg"),"Los teléfonos de tus referencias deben ser distintos al tuyo.","err");
-    if(r1t===r2t) return msg($("#formMsg"),"Las 2 referencias deben tener teléfonos distintos.","err");
-    if(!credFile) return msg($("#formMsg"),"Sube o toma la foto de tu credencial.","err");
-    if(!domFile) return msg($("#formMsg"),"Sube o toma la foto de tu comprobante de domicilio.","err");
-    if(primeraVez && monto>CONFIG.MONTO_PRIMERA_VEZ) return msg($("#formMsg"),`En tu primera solicitud el máximo es ${money(CONFIG.MONTO_PRIMERA_VEZ)}.`,"err");
+    const fm=$("#formMsg");
+    const nombre=$("#fNombre").value.trim(); const monto=+$("#fMonto").value;
+    if(nombre.length<5 || !nombre.includes(" ")) return msg(fm,"Escribe el nombre completo (nombre y apellidos).","err");
+    const e=exp.leer(); if(e.error) return msg(fm,e.error,"err");
+    const c=leerContacto(); if(c.error) return msg(fm,c.error,"err");
     const btn=$("#btnEnviar"); btn.disabled=true;
     try{
-      const uid=auth.currentUser.uid; const ts=Date.now();
-      msg($("#formMsg"),'<span class="loader"></span> Subiendo identificación (1/2)…',"info");
-      const credURL=await subirImagen(`credenciales/${uid}/${ts}_cred.jpg`, credFile);
-      msg($("#formMsg"),'<span class="loader"></span> Subiendo comprobante (2/2)…',"info");
-      const domURL =await subirImagen(`domicilio/${uid}/${ts}_dom.jpg`, domFile);
-      msg($("#formMsg"),'<span class="loader"></span> Enviando solicitud…',"info");
-      await addDoc(collection(db,"solicitudes"), {
-        uid, nombre, telefono:tel, clabe, email:auth.currentUser.email,
-        ref1Nombre:r1n, ref1Tel:r1t, ref2Nombre:r2n, ref2Tel:r2t,
-        credencialURL:credURL, comprobanteURL:domURL,
-        monto, cuotaSemanal:cuotaDe(monto), plazo:CONFIG.PLAZO_SEMANAS,
-        estado:"pendiente", esPrimerPrestamo:primeraVez, contratoAceptado:false, createdAt:serverTimestamp() });
-      userData = {...userData, nombre, telefono:tel, clabe};
-      await setDoc(doc(db,"users",uid), {nombre, telefono:tel, clabe}, {merge:true});
-    }catch(e){ msg($("#formMsg"),"No se pudo enviar: "+traducirError(e),"err"); btn.disabled=false; }
+      const uid=auth.currentUser.uid;
+      const docs = await exp.subir(uid, p=> msg(fm, barra("Subiendo documentos…", p), "info"));
+      msg(fm,'<span class="loader"></span> Enviando solicitud…',"info");
+      await conTiempo(addDoc(collection(db,"solicitudes"), {
+        uid, nombre, email:auth.currentUser.email, ...c.datos, ...docs,
+        monto, cuotaSemanal:cuotaDe(monto), plazo:CONFIG.PLAZO_SEMANAS, origen:"web",
+        estado:"pendiente", contratoAceptado:false, createdAt:serverTimestamp() }));
+      userData = {...userData, nombre, telefono:c.datos.telefono, clabe:c.datos.clabe};
+      setDoc(doc(db,"users",uid), {nombre, telefono:c.datos.telefono, clabe:c.datos.clabe}, {merge:true}).catch(()=>{});
+    }catch(er){ msg(fm,"No se pudo enviar: "+traducirError(er),"err"); btn.disabled=false; }
   });
 }
 
 /* ===== Vistas según estado ===== */
 function renderSolicitud(s, docs){
   if(s.estado==="pendiente") renderPendiente(s, docs);
-  else if(s.estado==="aprobado") renderContrato(s);
+  else if(s.estado==="aprobado") renderFirma(s);
+  else if(s.estado==="por_firmar") renderPorFirmar(s);
   else if(s.estado==="activo") renderActivo(s);
 }
 function renderPendiente(s, docs){
@@ -1425,6 +1596,7 @@ function renderPendiente(s, docs){
     <div class="card center">
       <span class="pill pendiente">EN ESPERA</span>
       <h2 style="margin-top:12px">Solicitud enviada</h2>
+      <ol class="pasos"><li class="on">Datos y documentos</li><li class="cur">Autorización</li><li>Firma</li></ol>
       <p class="muted">Tu solicitud por <b class="gold">${money(s.monto)}</b> está en revisión. Te avisaremos aquí cuando sea autorizada (normalmente en menos de 24 horas).</p>
       <div class="card" style="text-align:left">
         <div class="kv"><span>Monto solicitado</span><b>${money(s.monto)}</b></div>
@@ -1445,57 +1617,118 @@ function renderPendiente(s, docs){
     catch(e){ msg($("#pendMsg"),traducirError(e),"err"); b.disabled=false; }
   });
 }
-function renderContrato(s){
-  const hoy=new Date();
+
+/* Cliente dado de alta por el administrador: completa su expediente y firma */
+function renderPorFirmar(s){
   $("#dashBody").innerHTML = `
-    <div class="card">
-      <div class="center"><span class="pill aprobado">APROBADO</span>
-        <h2 style="margin-top:10px">¡Tu préstamo fue autorizado!</h2>
-        <p class="muted">Lee y acepta el contrato para activar tu préstamo por <b class="gold">${money(s.monto)}</b>. El depósito se realiza a tu CLABE terminación <b>${esc(String(s.clabe||"").slice(-4))}</b>.</p></div>
-      ${contratoHTML(s,hoy)}
-      <label class="check" style="margin-top:16px">
-        <input type="checkbox" id="chkAcepto"> <span>He leído y acepto los términos del contrato, incluyendo pagar <b>${money(s.cuotaSemanal)}</b> cada sábado durante <b>${esc(s.plazo)} semanas</b>.</span></label>
-      <div id="contMsg"></div>
-      <button id="btnAceptar" class="btn btn-gold btn-block btn-lg" style="margin-top:12px">Aceptar y activar mi préstamo</button>
+    <div class="card formcard">
+      <div class="center"><span class="pill aprobado">EXPEDIENTE PENDIENTE</span>
+        <h2 style="margin-top:10px">Completa tu expediente y firma tus documentos</h2>
+        <p class="muted">Tu préstamo por <b class="gold">${money(s.monto)}</b> (${esc(s.plazo)} pagos de ${money(s.cuotaSemanal)}) ya está registrado. Para formalizarlo sube tus documentos y firma en línea.</p></div>
+      <ol class="pasos"><li class="cur">Documentos</li><li>Firma</li></ol>
+      ${s.tipoDeudor==="moral"?`<div class="kv"><span>Representante legal</span><b>${esc(s.nombre)}</b></div>`:`<div class="kv"><span>Titular</span><b>${esc(s.nombre)}</b></div>`}
+      <div id="expBox">${expedienteHTML(s,{tipoFijo:s.tipoDeudor||"fisica"})}</div>
+      <div id="ctoBox">${contactoFormHTML(s)}</div>
+      <div id="formMsg"></div>
+      <button id="btnSig" class="btn btn-gold btn-block btn-lg" style="margin-top:16px">Continuar a la firma ${ico("arrow")}</button>
     </div>`;
-  $("#btnAceptar").addEventListener("click", async ()=>{
-    if(!$("#chkAcepto").checked){ return msg($("#contMsg"),"Debes marcar la casilla de aceptación.","err"); }
-    const btn=$("#btnAceptar"); btn.disabled=true; msg($("#contMsg"),'<span class="loader"></span> Activando…',"info");
-    try{ await updateDoc(doc(db,"solicitudes",s.id), { estado:"activo", contratoAceptado:true, fechaInicio:serverTimestamp(), calendarioV:2 }); }
-    catch(e){ msg($("#contMsg"),traducirError(e),"err"); btn.disabled=false; }
+  const exp = bindExpediente($("#expBox"), s, {tipoFijo:s.tipoDeudor||"fisica", errEl:$("#formMsg")});
+  $("#fClabe").addEventListener("input", e=>{ e.target.value = soloDigitos(e.target.value).slice(0,18); });
+  $("#btnSig").addEventListener("click", ()=>{
+    const e=exp.leer(); if(e.error) return msg($("#formMsg"),e.error,"err");
+    const c=leerContacto(); if(c.error) return msg($("#formMsg"),c.error,"err");
+    renderFirma({...s, ...e.datos, ...c.datos}, {exp, contacto:c.datos});
   });
 }
-function contratoHTML(s,fecha){
-  const nombre=esc(s.nombre), total=s.cuotaSemanal*s.plazo;
-  return `
-  <div class="contract">
-    <h3 style="text-align:center">CONTRATO DE PRÉSTAMO MERCANTIL (MUTUO CON INTERÉS)</h3>
-    <p style="text-align:center;color:var(--muted)">${CONFIG.EMPRESA} — ${CONFIG.EMPRESA_LEMA}<br><small>Folio: ${esc(s.id)}</small></p>
-    <p>En ${esc(CONFIG.CIUDAD)}, con fecha <b>${fmtFecha(fecha)}</b>, celebran el presente contrato de préstamo mercantil, por una parte <b>${CONFIG.EMPRESA}</b> (<b>"EL ACREEDOR"</b>), y por la otra <b>${nombre}</b>, con teléfono ${esc(s.telefono)} (<b>"EL DEUDOR"</b>), al tenor de las siguientes cláusulas:</p>
-    <p><b>DECLARACIONES.</b> Declara EL DEUDOR que los datos y documentos proporcionados (identificación oficial, comprobante de domicilio, cuenta CLABE y referencias) son verídicos.</p>
-    <div style="margin:12px 0">
-      <div class="kv"><span>Monto del préstamo (capital)</span><b>${money(s.monto)}</b></div>
-      <div class="kv"><span>Pago semanal (capital + interés)</span><b>${money(s.cuotaSemanal)}</b></div>
-      <div class="kv"><span>Plazo</span><b>${esc(s.plazo)} semanas</b></div>
-      <div class="kv"><span>Total a pagar</span><b>${money(total)}</b></div>
-      <div class="kv"><span>Día de pago</span><b>Cada sábado</b></div>
-      <div class="kv"><span>Cuenta de depósito (CLABE)</span><b>${esc(s.clabe||"—")}</b></div>
-    </div>
-    <p><b>PRIMERA. Objeto.</b> EL ACREEDOR entrega en préstamo a EL DEUDOR la cantidad de <b>${money(s.monto)}</b>, mediante depósito a la cuenta CLABE indicada, que EL DEUDOR se obliga a restituir con sus intereses en los términos pactados.</p>
-    <p><b>SEGUNDA. Forma de pago.</b> EL DEUDOR se obliga a realizar pagos semanales de <b>${money(s.cuotaSemanal)}</b> cada uno, durante <b>${esc(s.plazo)} semanas</b>, efectuados <b>cada sábado</b>, por un total de <b>${money(total)}</b>, subiendo el comprobante en esta plataforma para su confirmación.</p>
-    <p><b>TERCERA. Interés.</b> El pago semanal comprende capital e interés ordinario pactado, que EL DEUDOR acepta expresamente.</p>
-    <p><b>CUARTA. Comprobación.</b> Cada pago se tiene por realizado cuando EL DEUDOR sube el comprobante y EL ACREEDOR lo confirma en la plataforma, único medio válido para dar por pagada la semana.</p>
-    <p><b>QUINTA. Incumplimiento.</b> El atraso o falta de pago faculta a EL ACREEDOR a exigir el cumplimiento y, en su caso, intereses moratorios, sin perjuicio de las acciones legales que correspondan conforme a la legislación aplicable.</p>
-    <p><b>SEXTA. Pago anticipado.</b> EL DEUDOR podrá liquidar anticipadamente el saldo, solicitando a EL ACREEDOR el monto correspondiente.</p>
-    <p><b>SÉPTIMA. Terminación.</b> El contrato concluye cuando EL DEUDOR cubra la totalidad de las ${esc(s.plazo)} semanas y EL ACREEDOR las confirme, quedando el préstamo <b>liquidado</b>.</p>
-    <p><b>OCTAVA. Jurisdicción.</b> Las partes se someten a las leyes y tribunales competentes del domicilio de EL ACREEDOR, renunciando a cualquier otro fuero.</p>
-    <p style="margin-top:16px">Leído el contrato y enteradas las partes de su contenido y alcance legal, lo aceptan y ratifican de forma electrónica en esta plataforma.</p>
-    <div class="grid2" style="margin-top:18px">
-      <div class="center"><div style="border-top:1px solid var(--line);margin-top:26px;padding-top:6px">EL ACREEDOR<br><b>${CONFIG.EMPRESA}</b></div></div>
-      <div class="center"><div style="border-top:1px solid var(--line);margin-top:26px;padding-top:6px">EL DEUDOR<br><b>${nombre}</b></div></div>
-    </div>
-  </div>`;
+
+/* ===== Firma de los 3 documentos ===== */
+function firmaPad(cv){
+  const ctx=cv.getContext("2d"); let vacia=true, dib=false, last=null, largo=0;
+  function ajustar(){ const r=cv.getBoundingClientRect(), dpr=window.devicePixelRatio||1;
+    cv.width=Math.round(r.width*dpr); cv.height=Math.round(r.height*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.lineWidth=2.4; ctx.lineCap="round"; ctx.lineJoin="round"; ctx.strokeStyle="#0b1d3a"; vacia=true; largo=0; }
+  const pos=e=>{ const r=cv.getBoundingClientRect(); return {x:e.clientX-r.left, y:e.clientY-r.top}; };
+  cv.addEventListener("pointerdown", e=>{ e.preventDefault(); cv.setPointerCapture(e.pointerId); dib=true; last=pos(e); ctx.beginPath(); ctx.arc(last.x,last.y,1.1,0,7); ctx.fillStyle="#0b1d3a"; ctx.fill(); });
+  cv.addEventListener("pointermove", e=>{ if(!dib) return; e.preventDefault(); const p=pos(e);
+    ctx.beginPath(); ctx.moveTo(last.x,last.y); const mx=(last.x+p.x)/2, my=(last.y+p.y)/2; ctx.quadraticCurveTo(last.x,last.y,mx,my); ctx.lineTo(p.x,p.y); ctx.stroke();
+    largo+=Math.hypot(p.x-last.x,p.y-last.y); last=p; if(largo>40) vacia=false; cv.closest(".fpad").classList.add("firmado"); });
+  const fin=()=>{ dib=false; }; cv.addEventListener("pointerup",fin); cv.addEventListener("pointercancel",fin); cv.addEventListener("pointerleave",fin);
+  let w=cv.clientWidth; window.addEventListener("resize", ()=>{ if(cv.isConnected && vacia && cv.clientWidth!==w){ w=cv.clientWidth; ajustar(); } });
+  ajustar();
+  return { vacia:()=>vacia, limpiar:()=>{ ctx.clearRect(0,0,cv.width,cv.height); vacia=true; largo=0; cv.closest(".fpad").classList.remove("firmado"); },
+    blob:()=> new Promise(r=>cv.toBlob(r,"image/png")) };
 }
+function renderFirma(s, porFirmar){
+  const ahora=new Date();
+  const docsHTML = L.DOCS.map((d,i)=>`
+    <div class="docbox" data-d="${d.id}">
+      <div class="docbox-h"><span class="docnum">${i+1}</span><div><b>${esc(d.titulo)}</b><small>Léelo completo antes de aceptarlo</small></div></div>
+      <div class="docscroll" tabindex="0">${L.render(d.id, s, {fechaFirma:ahora})}</div>
+      <label class="check"><input type="checkbox" data-acepto="${d.id}"> <span>He leído y acepto el <b>${esc(d.titulo.split(" (")[0])}</b>.</span></label>
+    </div>`).join("");
+  $("#dashBody").innerHTML = `
+    <div class="card formcard">
+      <div class="center"><span class="pill aprobado">${porFirmar?"ÚLTIMO PASO":"APROBADO"}</span>
+        <h2 style="margin-top:10px">${porFirmar?"Firma tus documentos":"¡Tu préstamo fue autorizado!"}</h2>
+        <p class="muted">Revisa y firma los 3 documentos para ${porFirmar?"formalizar":"activar"} tu préstamo por <b class="gold">${money(s.monto)}</b>${porFirmar?"":`. El depósito se realiza a tu CLABE terminación <b>${esc(String(s.clabe||"").slice(-4))}</b>`}.</p></div>
+      <ol class="pasos">${porFirmar?`<li class="on">Documentos</li><li class="cur">Firma</li>`:`<li class="on">Datos y documentos</li><li class="on">Autorización</li><li class="cur">Firma</li>`}</ol>
+      <div class="sumbox">
+        <div><span>Capital</span><b>${money(s.monto)}</b></div><div><span>Pago semanal</span><b>${money(s.cuotaSemanal)}</b></div>
+        <div><span>Plazo</span><b>${esc(s.plazo)} sábados</b></div><div><span>Total (pagaré)</span><b>${money(s.cuotaSemanal*s.plazo)}</b></div>
+      </div>
+      ${docsHTML}
+      <div class="docbox">
+        <div class="docbox-h"><span class="docnum">${ico("pen")}</span><div><b>Tu firma</b><small>Dibuja tu firma con el dedo o el mouse, igual que en tu identificación</small></div></div>
+        <div class="fpad"><canvas id="padFirma" aria-label="Recuadro para firmar"></canvas><span class="pad-ph">Firma aquí</span></div>
+        <div class="pad-act"><button type="button" class="btn btn-outline btn-sm" id="btnLimpiar">${ico("refresh")} Borrar firma</button>
+          <button type="button" class="btn btn-outline btn-sm" id="btnImprimir">${ico("download")} Descargar / imprimir</button></div>
+        <p class="hint">Tu firma electrónica queda ligada a tu cuenta, a la fecha y hora y a una huella digital de los documentos. Puedes pedir una copia impresa en cualquier momento.</p>
+      </div>
+      ${porFirmar?`<button type="button" class="linkish" id="btnVolver">${ico("arrow-left")} Corregir mis datos</button>`:""}
+      <div id="contMsg"></div>
+      <button id="btnAceptar" class="btn btn-gold btn-block btn-lg" style="margin-top:12px">${ico("pen")} Firmar y ${porFirmar?"formalizar":"activar"} mi préstamo</button>
+    </div>`;
+  const pad=firmaPad($("#padFirma"));
+  $("#btnLimpiar").addEventListener("click", pad.limpiar);
+  $("#btnImprimir").addEventListener("click", ()=> L.imprimir(L.todos(s,{fechaFirma:ahora}), "Documentos "+(s.id||"")));
+  if(porFirmar) $("#btnVolver").addEventListener("click", ()=> renderPorFirmar(s));
+  $("#btnAceptar").addEventListener("click", async ()=>{
+    const cm=$("#contMsg");
+    const falta=L.DOCS.find(d=>!document.querySelector(`[data-acepto="${d.id}"]`).checked);
+    if(falta){ document.querySelector(`.docbox[data-d="${falta.id}"]`).scrollIntoView({behavior:"smooth",block:"center"});
+      return msg(cm,`Marca la casilla de aceptación de: <b>${esc(falta.titulo)}</b>.`,"err"); }
+    if(pad.vacia()) return msg(cm,"Dibuja tu firma en el recuadro.","err");
+    const btn=$("#btnAceptar"); btn.disabled=true;
+    try{
+      const uid=auth.currentUser.uid, ts=Date.now();
+      msg(cm,'<span class="loader"></span> Preparando firma…',"info");
+      const [hash, firmaBlob] = await Promise.all([L.huella(s,{fechaFirma:ahora}), pad.blob()]);
+      const firmaDatos = { contratoAceptado:true, firmadoAt:serverTimestamp(), docsHash:hash, docsFirmados:L.DOCS.map(d=>d.id),
+                           firmaUA:String(navigator.userAgent||"").slice(0,300) };
+      if(porFirmar){
+        const exp = porFirmar.exp;
+        const r=exp.leer(); if(r.error) throw new Error(r.error);
+        const [firmaURL] = await subirArchivos([{path:`firmas/${uid}/${s.id}_${ts}.png`, blob:firmaBlob}]);
+        const docs = await exp.subir(uid, p=> msg(cm, barra("Subiendo documentos…", p), "info"));
+        msg(cm,'<span class="loader"></span> Registrando firma…',"info");
+        await conTiempo(updateDoc(doc(db,"solicitudes",s.id), {...porFirmar.contacto, ...docs, ...firmaDatos, firmaURL, estado:"activo"}));
+      }else{
+        const [firmaURL] = await subirArchivos([{path:`firmas/${uid}/${s.id}_${ts}.png`, blob:firmaBlob}], p=>msg(cm, barra("Enviando firma…", p), "info"));
+        msg(cm,'<span class="loader"></span> Activando…',"info");
+        await conTiempo(updateDoc(doc(db,"solicitudes",s.id), {...firmaDatos, firmaURL, estado:"activo", fechaInicio:serverTimestamp(), calendarioV:2}));
+      }
+    }catch(e){ msg(cm,traducirError(e),"err"); btn.disabled=false; }
+  });
+}
+/* Documentos firmados (para consulta e impresión) */
+function documentosFirmados(s){
+  const f = s.firmadoAt && s.firmadoAt.toDate ? s.firmadoAt.toDate() : null;
+  const opt = { fechaFirma: f || (s.fechaInicio && s.fechaInicio.toDate ? s.fechaInicio.toDate() : new Date()),
+    firma: s.firmaURL ? { img: urlSegura(s.firmaURL) ? s.firmaURL : "", fecha: f ? f.toLocaleString("es-MX",{dateStyle:"long",timeStyle:"short"}) : "", hash: s.docsHash||"" } : null };
+  return { html: L.todos(s, opt), opt };
+}
+const urlSegura = u => /^https:\/\//i.test(u||"");
+
 function datosPagoHTML(){
   const P=CONFIG.PAGO||{};
   if(!P.CLABE && !P.TARJETA){
@@ -1535,7 +1768,8 @@ function renderActivo(s){
         <thead><tr><th>#</th><th>Vence (sábado)</th><th>Pago</th><th>Comprobante</th><th>Estado</th></tr></thead>
         <tbody><tr><td colspan="5"><span class="loader"></span> Cargando…</td></tr></tbody></table></div>
     </div>
-    <details class="card"><summary class="gold" style="cursor:pointer;font-weight:700">Ver mi contrato</summary>${contratoHTML(s,inicio)}</details>`;
+    <details class="card" id="misDocs"><summary class="gold" style="cursor:pointer;font-weight:700">${ico("doc")} Mis documentos firmados (contrato, pagaré y aviso de privacidad)</summary><div class="pad-act" style="margin:12px 0"><button type="button" class="btn btn-outline btn-sm" id="btnImpDocs">${ico("download")} Descargar / imprimir</button></div><div id="docsFirmados"></div></details>`;
+  { const df=documentosFirmados(s); $("#docsFirmados").innerHTML=df.html; $("#btnImpDocs").addEventListener("click",()=>L.imprimir(df.html,"Documentos "+s.id)); }
   bindCopy($("#dashBody"));
   if(unsubPagos){unsubPagos();}
   unsubPagos = onSnapshot(collection(db,"solicitudes",s.id,"pagos"), snap=>{

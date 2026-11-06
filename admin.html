@@ -214,7 +214,7 @@ details.more[open] summary::before{transform:rotate(45deg)}
   .card{padding:18px 16px;border-radius:16px}
   .grid{grid-template-columns:1fr}
   .thumb{height:200px}
-  .bnav{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,255,255,.97);
+  .bnav{display:grid;grid-template-columns:repeat(6,1fr);position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,255,255,.97);
     -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:6px 4px calc(6px + var(--safeB))}
   .bnav button{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:54px;background:none;border:none;color:var(--ink3);font-size:.68rem;font-weight:600;cursor:pointer}
   .bnav button .ico{width:23px;height:23px}
@@ -226,6 +226,70 @@ details.more[open] summary::before{transform:rotate(45deg)}
 }
 @media(max-width:380px){ .weeks{grid-template-columns:repeat(4,1fr)} }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== Expediente ===== */
+.exp .kv b .pill{margin-left:6px}
+.docs3{display:grid;gap:14px;margin-top:12px}
+.docgrp-t{font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.docgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.docgrid figure{margin:0}.docgrid figcaption{font-size:.74rem;color:var(--ink3);margin-top:4px;text-align:center}
+.docgrid .thumb{height:130px}
+.firmabox{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--bg)}
+.firmabox img{width:150px;height:62px;object-fit:contain;background:#fff;border-radius:8px;border:1px solid var(--line)}
+.firmabox>div{flex:1;min-width:160px;display:flex;flex-direction:column;font-size:.84rem;color:var(--ink2)}
+.firmabox code{font-size:.72rem;color:var(--ink3)}
+/* ===== Alta de clientes ===== */
+.segA{display:inline-grid;grid-auto-flow:column;grid-auto-columns:1fr;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:4px;margin:16px 0 4px;gap:2px}
+.segA button{border:none;background:transparent;border-radius:9px;padding:9px 16px;font-weight:600;color:var(--ink2);cursor:pointer;min-height:40px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-size:.86rem;white-space:nowrap}
+.segA button.active{background:#fff;color:var(--ink);box-shadow:var(--sh1)}
+.segA.sm{margin:0}.segA.sm button{padding:6px 12px;min-height:34px;font-size:.8rem}
+.fgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:0 16px}
+.fgrid>div{grid-column:span 2}.fgrid>div.full{grid-column:1/-1}
+.fgrid>div:nth-child(n+5):not(.full){grid-column:span 1}
+.resumenA{background:var(--bg)!important;box-shadow:none!important;margin:16px 0!important;padding:14px!important}
+.minikpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.minikpis div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.minikpis span{display:block;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.minikpis b{font-family:var(--head);font-size:1rem}.minikpis .bad b{color:var(--bad)}
+.okcard{border-color:#bfe3cf}.okcard h3 .ico{color:var(--ok)}
+.okcard code{font-size:.95rem;background:var(--bg);padding:3px 8px;border-radius:6px;letter-spacing:.04em}
+.subt{font-size:1.02rem;font-weight:700;display:flex;align-items:center;gap:10px;margin:26px 0 12px}
+/* ===== Reportes ===== */
+.rep-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.rk{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--sh1);display:flex;flex-direction:column;gap:3px;min-width:0}
+.rk span{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.rk b{font-family:var(--head);font-size:1.4rem;color:var(--ink);overflow-wrap:anywhere}
+.rk small{font-size:.78rem;color:var(--ink2)}
+.rk.navy{background:linear-gradient(150deg,var(--n800),var(--n900));border-color:var(--n900)}.rk.navy span{color:var(--gold2)}.rk.navy b{color:#fff}.rk.navy small{color:#a9b8cc}
+.rk.ok b{color:var(--ok)}.rk.bad{border-color:#efb4b4}.rk.bad b{color:var(--bad)}
+.rep-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.rep-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.tablewrap{overflow-x:auto;margin:0 -4px}
+table.rep{width:100%;border-collapse:collapse;font-size:.86rem;min-width:860px}
+table.rep th{text-align:left;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);padding:10px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.rep td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:middle;white-space:nowrap}
+table.rep td small{display:block;color:var(--ink3);font-size:.74rem}
+table.rep tfoot td{font-weight:700;border-bottom:none;background:var(--bg)}
+table.rep tbody tr:hover{background:#fafbfd}
+.mbar{height:5px;border-radius:99px;background:var(--bg);margin-top:5px;width:90px;overflow:hidden}
+.mbar span{display:block;height:100%;background:var(--gold)}.mbar.ok span{background:var(--ok)}
+.content{margin:0 auto}
+@media(max-width:1280px){.rep-kpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:767px){
+  .rep-kpis{gap:10px}.rk{padding:12px 14px}.rk b{font-size:1.1rem}
+  .fgrid{grid-template-columns:1fr 1fr}.fgrid>div,.fgrid>div:nth-child(n+5):not(.full){grid-column:1/-1}
+  .minikpis{grid-template-columns:1fr 1fr}
+  .segA{display:grid;width:100%}
+  .rep-tools{width:100%}.rep-tools .segA.sm{overflow-x:auto}
+  table.rep{min-width:0}
+  table.rep thead,table.rep tfoot{display:none}
+  table.rep tr{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;padding:12px 4px;border-bottom:1px solid var(--line)}
+  table.rep td{border:none;padding:0;white-space:normal}
+  table.rep td::before{content:attr(data-label);display:block;font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+  table.rep td:first-child{grid-column:1/-1}
+  .bnav button{font-size:.6rem}
+  .docgrid{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
@@ -316,6 +380,8 @@ details.more[open] summary::before{transform:rotate(45deg)}
     <button class="nav-i active" data-tab="pend" title="Solicitudes"><svg class="ico"><use href="#i-inbox"/></svg><span class="lbl">Solicitudes</span><span class="badge hidden" data-badge="bPend">0</span></button>
     <button class="nav-i" data-tab="pagos" title="Pagos por confirmar"><svg class="ico"><use href="#i-wallet"/></svg><span class="lbl">Pagos por confirmar</span><span class="badge hidden" data-badge="bPagos">0</span></button>
     <button class="nav-i" data-tab="activos" title="Préstamos activos"><svg class="ico"><use href="#i-briefcase"/></svg><span class="lbl">Préstamos activos</span><span class="badge hidden" data-badge="bVenc">0</span></button>
+    <button class="nav-i" data-tab="rep" title="Reportes"><svg class="ico"><use href="#i-chart"/></svg><span class="lbl">Reportes</span></button>
+    <button class="nav-i" data-tab="alta" title="Clientes existentes"><svg class="ico"><use href="#i-users"/></svg><span class="lbl">Clientes existentes</span><span class="badge hidden" data-badge="bFirma">0</span></button>
     <button class="nav-i" data-tab="hist" title="Historial"><svg class="ico"><use href="#i-archive"/></svg><span class="lbl">Historial</span></button>
     <div class="side-foot"><div class="avatar">A</div><div class="who"><b>Administrador</b><span id="admWho">—</span></div></div>
   </aside>
@@ -339,6 +405,8 @@ details.more[open] summary::before{transform:rotate(45deg)}
       <div id="tab-pend"></div>
       <div id="tab-pagos" class="hidden"></div>
       <div id="tab-activos" class="hidden"></div>
+      <div id="tab-rep" class="hidden"></div>
+      <div id="tab-alta" class="hidden"><div id="altaForm"></div><div id="altaLista"></div></div>
       <div id="tab-hist" class="hidden"></div>
     </div>
   </div>
@@ -347,6 +415,8 @@ details.more[open] summary::before{transform:rotate(45deg)}
     <button class="active" data-tab="pend"><svg class="ico"><use href="#i-inbox"/></svg>Solicitudes<span class="badge hidden" data-badge="bPend">0</span></button>
     <button data-tab="pagos"><svg class="ico"><use href="#i-wallet"/></svg>Pagos<span class="badge hidden" data-badge="bPagos">0</span></button>
     <button data-tab="activos"><svg class="ico"><use href="#i-briefcase"/></svg>Activos<span class="badge hidden" data-badge="bVenc">0</span></button>
+    <button data-tab="rep"><svg class="ico"><use href="#i-chart"/></svg>Reportes</button>
+    <button data-tab="alta"><svg class="ico"><use href="#i-users"/></svg>Clientes<span class="badge hidden" data-badge="bFirma">0</span></button>
     <button data-tab="hist"><svg class="ico"><use href="#i-archive"/></svg>Historial</button>
   </nav>
 </section>
@@ -360,20 +430,21 @@ if('serviceWorker' in navigator && (location.protocol==='https:' || location.hos
   window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
 }
 </script>
+<script src="legal.js"></script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut }
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, createUserWithEmailAndPassword, sendPasswordResetEmail }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, collection, doc, getDocs, updateDoc, setDoc, query, orderBy,
-         onSnapshot, serverTimestamp }
+import { getFirestore, collection, doc, getDocs, updateDoc, setDoc, addDoc, query, orderBy, where,
+         onSnapshot, serverTimestamp, Timestamp, writeBatch }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 /* ===== CONFIG (debe coincidir con prestamos.html y con firestore.rules) ===== */
 const CONFIG = {
   ADMIN_EMAILS: ["jesus.lujanrdz@gmail.com"],   // 👈 correo(s) del administrador
   EMPRESA: "GRUPO LUJÁN FINANCIERA",
-  PLAZO_SEMANAS: 16, FACTOR_SEMANAL: 0.10, MONTO_PRIMERA_VEZ: 5000
+  PLAZO_SEMANAS: 16, FACTOR_SEMANAL: 0.10
 };
 const firebaseConfig = {
   apiKey: "AIzaSyBTmf66poDm9c1_Q1fjOo9O4MFcf51BAQY",
@@ -384,7 +455,7 @@ const firebaseConfig = {
   appId: "1:318205833706:web:44bb7a9522d54e2406c293",
   measurementId: "G-HH5B85QCWQ"
 };
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig, "panelAdmin");   // sesión separada de la del portal de clientes
 isSupported().then(function(ok){ if(ok){ try{ getAnalytics(app); }catch(e){} } }).catch(function(){});
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -508,7 +579,7 @@ function escuchar(){
           const nowPend = contarPagosPendientes();
           if(!primera && nowPend>prevPend){ notificar("Comprobante de pago recibido", `${s.nombre} subió un comprobante`); }
           primera=false;
-          renderPagos(); renderActivos(); renderStats();
+          renderPagos(); renderActivos(); renderStats(); renderReportes();
         });
       }
     });
@@ -531,19 +602,20 @@ function contarPagosPendientes(){
 }
 
 /* ===== Tabs + búsqueda ===== */
-const TITULOS={pend:"Solicitudes",pagos:"Pagos por confirmar",activos:"Préstamos activos",hist:"Historial"};
+const TITULOS={pend:"Solicitudes",pagos:"Pagos por confirmar",activos:"Préstamos activos",rep:"Reportes",alta:"Clientes existentes",hist:"Historial"};
 function irA(tab){
   document.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("active", x.dataset.tab===tab));
-  ["pend","pagos","activos","hist"].forEach(t=> $("#tab-"+t).classList.toggle("hidden", t!==tab));
+  Object.keys(TITULOS).forEach(t=> $("#tab-"+t).classList.toggle("hidden", t!==tab));
   $("#pageTitle").textContent = TITULOS[tab];
+  $("#stats").classList.toggle("hidden", tab==="rep" || tab==="alta");
   window.scrollTo({top:0});
 }
 document.querySelectorAll("[data-tab]").forEach(b=> b.addEventListener("click", ()=>irA(b.dataset.tab)));
 $("#buscar").addEventListener("input", e=>{ filtro=e.target.value.trim().toLowerCase(); renderTodo(); });
-const coincide = s => !filtro || [s.nombre,s.telefono,s.email,s.clabe].some(v=>String(v||"").toLowerCase().includes(filtro));
+const coincide = s => !filtro || [s.nombre,s.razonSocial,s.telefono,s.email,s.clabe].some(v=>String(v||"").toLowerCase().includes(filtro));
 
 /* ===== Render principal ===== */
-function renderTodo(){ renderStats(); renderPendientes(); renderPagos(); renderActivos(); renderHistorial(); }
+function renderTodo(){ renderStats(); renderPendientes(); renderPagos(); renderActivos(); renderHistorial(); renderReportes(); renderAlta(); }
 
 function badge(id,n){ document.querySelectorAll(`[data-badge="${id.slice(1)}"]`).forEach(e=>{ e.textContent=n; e.classList.toggle("hidden", n===0); }); }
 
@@ -565,15 +637,6 @@ function renderStats(){
   badge("#bVenc", act.filter(s=>resumenPrestamo(s).venc>0).length);
 }
 
-function docThumb(s){
-  const c=urlSegura(s.credencialURL), d=urlSegura(s.comprobanteURL);
-  return `<div class="grid">
-    <div><div class="muted" style="font-size:.8rem;margin-bottom:4px">Credencial / ID</div>
-      ${c?`<img class="thumb" src="${c}" data-img="${c}" alt="Credencial">`:'<div class="muted">—</div>'}</div>
-    <div><div class="muted" style="font-size:.8rem;margin-bottom:4px">Comprobante domicilio</div>
-      ${d?`<img class="thumb" src="${d}" data-img="${d}" alt="Comprobante">`:'<div class="muted">—</div>'}</div>
-  </div>`;
-}
 function contactoHTML(s){
   const wa=waCliente(s.telefono);
   return `<span class="ct">${ico("phone")}${esc(s.telefono)}</span>${wa?`<a class="ct wa" href="${wa}" target="_blank" rel="noopener">${ico("whatsapp")}WhatsApp</a>`:""}${s.email?`<span class="ct">${ico("mail")}${esc(s.email)}</span>`:""}`;
@@ -596,9 +659,9 @@ function alertas(s){
   const a=[];
   const previos = solicitudes.filter(x=>x.uid===s.uid && x.id!==s.id);
   const tuvoPrestamo = previos.some(x=>["aprobado","activo","liquidado"].includes(x.estado));
-  if(!tuvoPrestamo && Number(s.monto)>CONFIG.MONTO_PRIMERA_VEZ) a.push(`Primer préstamo por ${money(s.monto)}: supera el máximo de ${money(CONFIG.MONTO_PRIMERA_VEZ)} para primera vez.`);
+  if(!tuvoPrestamo) a.push("Cliente nuevo: primer préstamo con nosotros.");
   if(Number(s.cuotaSemanal)!==Math.round(Number(s.monto)*CONFIG.FACTOR_SEMANAL) || Number(s.plazo)!==CONFIG.PLAZO_SEMANAS) a.push("La cuota o el plazo no coinciden con las condiciones vigentes.");
-  if(previos.some(x=>["activo","aprobado"].includes(x.estado))) a.push("Este cliente ya tiene un préstamo activo o aprobado.");
+  if(previos.some(x=>["activo","aprobado","por_firmar"].includes(x.estado))) a.push("Este cliente ya tiene un préstamo activo o aprobado.");
   if(previos.some(x=>x.estado==="pendiente")) a.push("Este cliente tiene otra solicitud pendiente (posible duplicado).");
   const otros = solicitudes.filter(x=>x.uid!==s.uid && x.clabe && x.clabe===s.clabe);
   if(otros.length) a.push(`La CLABE también aparece en solicitudes de otro cliente (${esc(otros[0].nombre)}).`);
@@ -617,7 +680,7 @@ function renderPendientes(){
   cont.innerHTML = pend.map(s=>`
     <div class="card" data-id="${esc(s.id)}">
       <div class="topbar">
-        <div><h3>${esc(s.nombre)} ${s.esPrimerPrestamo?'<span class="pill primera">1ª vez</span>':''}</h3>
+        <div><h3>${esc(s.razonSocial||s.nombre)} ${s.tipoDeudor==="moral"?'<span class="pill primera">Empresa</span>':''}</h3>
           <div class="muted">${contactoHTML(s)}</div>
           <div class="muted" style="font-size:.8rem">Solicitado: ${fmt(s.createdAt)}</div></div>
         <span class="pill pendiente">Pendiente</span>
@@ -644,7 +707,7 @@ function renderPendientes(){
 }
 async function aprobar(id,btn){
   const s=solicitudes.find(x=>x.id===id);
-  if(s && !confirm(`¿Aprobar el préstamo de ${money(s.monto)} para ${s.nombre}?\nEl cliente deberá aceptar el contrato en su cuenta.`)) return;
+  if(s && !confirm(`¿Aprobar el préstamo de ${money(s.monto)} para ${s.nombre}?\nEl cliente deberá firmar en su cuenta el contrato, el pagaré y el aviso de privacidad.`)) return;
   btn.disabled=true;
   try{ await updateDoc(doc(db,"solicitudes",id), {estado:"aprobado", aprobadoAt:serverTimestamp()}); }
   catch(e){ btn.disabled=false; alert("Error al aprobar: "+(e.message||e.code)); }
@@ -671,7 +734,7 @@ function renderPagos(){
   cont.innerHTML = vis.map(({s,p})=>{ const u=urlSegura(p.comprobanteURL); return `
     <div class="card">
       <div class="topbar">
-        <div><h3>${esc(s.nombre)}</h3><div class="muted">${contactoHTML(s)}<span class="ct">Préstamo de ${money(s.monto)}</span></div></div>
+        <div><h3>${esc(s.razonSocial||s.nombre)}</h3><div class="muted">${contactoHTML(s)}<span class="ct">Préstamo de ${money(s.monto)}</span></div></div>
         <span class="pill pendiente">Semana ${esc(p.semana)}</span>
       </div>
       <div class="kv"><span>Cuota de la semana</span><b>${money(p.cuota||s.cuotaSemanal)}</b></div>
@@ -722,19 +785,20 @@ async function pagoManual(sid,semana,btn){
 /* --- Activos (y aprobados esperando aceptación) --- */
 function renderActivos(){
   const cont=$("#tab-activos");
-  const act = solicitudes.filter(s=>(s.estado==="activo" || s.estado==="aprobado") && coincide(s));
+  const act = solicitudes.filter(s=>["activo","aprobado","por_firmar"].includes(s.estado) && coincide(s));
   if(!act.length){ cont.innerHTML=vacio(filtro?"Sin resultados para la búsqueda.":"No hay préstamos activos."); return; }
   // Guardar qué detalles estaban abiertos para no cerrarlos al refrescar
   const abiertos=new Set([...cont.querySelectorAll("details[open][data-id]")].map(d=>d.dataset.id));
   // Primero los que tienen semanas vencidas
   const ord = act.map(s=>({s, r: s.estado==="activo"?resumenPrestamo(s):null})).sort((a,b)=>((b.r&&b.r.venc)||0)-((a.r&&a.r.venc)||0));
   cont.innerHTML = ord.map(({s,r})=>{
-    if(s.estado==="aprobado"){
+    if(s.estado==="aprobado" || s.estado==="por_firmar"){
+      const pf=s.estado==="por_firmar";
       return `<div class="card">
-        <div class="topbar"><div><h3>${esc(s.nombre)}</h3><div class="muted">${contactoHTML(s)}<span class="ct">${money(s.monto)} · cuota ${money(s.cuotaSemanal)}</span></div>
+        <div class="topbar"><div><h3>${esc(s.razonSocial||s.nombre)}</h3><div class="muted">${contactoHTML(s)}<span class="ct">${money(s.monto)} · cuota ${money(s.cuotaSemanal)}</span></div>
           <div class="muted" style="font-size:.8rem">Aprobado: ${fmt(s.aprobadoAt)}</div></div>
-          <span class="pill aprobado">Aprobado (esperando aceptación)</span></div>
-        ${clabeHTML(s)}
+          <span class="pill aprobado">${pf?"Esperando documentos y firma":"Aprobado (esperando firma)"}</span></div>
+        ${pf?"":clabeHTML(s)}
         <div class="actions"><button class="btn btn-bad mini" data-cancel="${esc(s.id)}">Cancelar aprobación</button></div>
       </div>`;
     }
@@ -745,8 +809,8 @@ function renderActivos(){
       weeks.push(`<span class="wk ${c}" title="Semana ${i}${r.fechas[i-1]?" · "+fmtFecha(r.fechas[i-1]):""}">${i}</span>`); }
     const opciones=[]; for(let i=1;i<=r.plazo;i++){ const p=r.m[i]; if(!(p&&p.estado==="confirmado")) opciones.push(`<option value="${i}">Semana ${i}${r.fechas[i-1]?" — "+fmtFecha(r.fechas[i-1]):""}</option>`); }
     return `<div class="card">
-      <div class="topbar"><div><h3>${esc(s.nombre)}</h3><div class="muted">${contactoHTML(s)}</div>
-        <div class="muted" style="font-size:.85rem">${money(s.monto)} · cuota ${money(s.cuotaSemanal)} · inicio ${fmt(s.fechaInicio)}</div></div>
+      <div class="topbar"><div><h3>${esc(s.razonSocial||s.nombre)} ${s.origen==="admin"?'<span class="pill primera">Alta manual</span>':""}</h3><div class="muted">${contactoHTML(s)}</div>
+        <div class="muted" style="font-size:.85rem">Va en la semana <b class="gold">${semanaActual(s,r)} de ${r.plazo}</b> · ${money(s.monto)} · cuota ${money(s.cuotaSemanal)} · inicio ${fmt(s.fechaInicio)}</div></div>
         ${r.venc?`<span class="pill vencido">${r.venc} vencida${r.venc>1?"s":""}</span>`:'<span class="pill activo">Al corriente</span>'}</div>
       <div class="muted" style="font-size:.85rem;margin-top:8px">Semanas confirmadas: <b class="gold">${r.conf}/${r.plazo}</b> · Cobrado ${money(r.conf*s.cuotaSemanal)} · Resta ${money((r.plazo-r.conf)*s.cuotaSemanal)}${r.prox?` · Próximo: ${fmtFecha(r.prox)}`:""}</div>
       <div class="progressbar"><span style="width:${pct}%"></span></div>
@@ -761,12 +825,14 @@ function renderActivos(){
         <div style="margin-top:12px">${docThumb(s)}</div>
         ${opciones.length?`<label>Registrar pago recibido por otro medio (efectivo, etc.)</label>
         <div class="actions" style="margin-top:0"><select data-sel="${esc(s.id)}">${opciones.join("")}</select>
-          <button class="btn btn-ok mini" data-man="${esc(s.id)}">${ico("check")} Registrar como pagada</button></div>`:""}
+          <button class="btn btn-ok mini" data-man="${esc(s.id)}">${ico("check")} Registrar como pagada</button></div>
+        <div class="actions"><button class="btn btn-ghost mini" data-ajuste="${esc(s.id)}">${ico("pen")} Ajustar hasta qué semana lleva pagado</button></div>`:""}
       </details>
     </div>`;
   }).join("");
   bindComunes(cont);
   cont.querySelectorAll("[data-cancel]").forEach(b=>b.addEventListener("click",()=>rechazar(b.dataset.cancel,b,"¿Cancelar esta aprobación? La solicitud pasará a Rechazada.")));
+  cont.querySelectorAll("[data-ajuste]").forEach(b=>b.addEventListener("click",()=>ajustarSemana(b.dataset.ajuste,b)));
   cont.querySelectorAll("[data-man]").forEach(b=>b.addEventListener("click",()=>{
     const sel=cont.querySelector(`select[data-sel="${CSS.escape(b.dataset.man)}"]`); pagoManual(b.dataset.man, +sel.value, b); }));
 }
@@ -780,16 +846,283 @@ function renderHistorial(){
   const fecha=s=> s.estado==="liquidado"?s.liquidadoAt : s.estado==="cancelado"?s.canceladoAt : s.rechazadoAt;
   cont.innerHTML = h.map(s=>`
     <div class="card">
-      <div class="topbar"><div><h3>${esc(s.nombre)}</h3><div class="muted">${contactoHTML(s)}<span class="ct">${money(s.monto)}</span></div>
+      <div class="topbar"><div><h3>${esc(s.razonSocial||s.nombre)}</h3><div class="muted">${contactoHTML(s)}<span class="ct">${money(s.monto)}</span></div>
         <div class="muted" style="font-size:.8rem">Solicitado ${fmt(s.createdAt)} · ${etiqueta[s.estado]} ${fmt(fecha(s))}</div>
         ${s.motivoRechazo?`<div class="muted" style="font-size:.85rem">Motivo: ${esc(s.motivoRechazo)}</div>`:""}</div>
         <span class="pill ${esc(s.estado)}">${etiqueta[s.estado]}</span></div>
     </div>`).join("");
 }
 
+
+/* ===================== EXPEDIENTE Y DOCUMENTOS ===================== */
+const L = window.LEGAL;
+function fotosHTML(titulo, urls, etiquetas){
+  const ok=(urls||[]).map(urlSegura).filter(Boolean);
+  if(!ok.length) return "";
+  return `<div class="docgrp"><div class="docgrp-t">${titulo}</div><div class="docgrid">${ok.map((u,i)=>`<figure><img class="thumb" src="${u}" data-img="${u}" alt="${esc(titulo)}"><figcaption>${esc((etiquetas&&etiquetas[i])||("Foto "+(i+1)))}</figcaption></figure>`).join("")}</div></div>`;
+}
+function docThumb(s){
+  const tId=L.TIPOS_ID[s.idTipo], tGar=L.TIPOS_GAR[s.garantiaTipo];
+  const ids = s.idURLs && s.idURLs.length ? s.idURLs : [s.credencialURL];
+  const firma = urlSegura(s.firmaURL);
+  return `<div class="exp">
+    ${s.tipoDeudor==="moral"?`<div class="kv"><span>Deudor</span><b>${esc(s.razonSocial)} <span class="pill primera">Empresa</span></b></div><div class="kv"><span>Representante legal</span><b>${esc(s.nombre)}</b></div>`:""}
+    ${s.domicilio?`<div class="kv"><span>Domicilio</span><b>${esc(s.domicilio)}</b></div>`:""}
+    ${s.rfc?`<div class="kv"><span>RFC / CURP</span><b>${esc(s.rfc)}</b></div>`:""}
+    ${s.garantiaTipo?`<div class="kv"><span>Garantía</span><b>${esc(tGar?tGar.nombre:s.garantiaTipo)}${s.garantiaDesc?`<br><span class="muted">${esc(s.garantiaDesc)}</span>`:""}</b></div>`:""}
+    <div class="docs3">
+      ${fotosHTML("Identificación"+(tId?" · "+tId.nombre:""), ids, tId?tId.fotos:null) || '<div class="docgrp"><div class="docgrp-t">Identificación</div><div class="muted">—</div></div>'}
+      ${fotosHTML("Comprobante de domicilio"+(s.domTipo&&L.TIPOS_DOM[s.domTipo]?" · "+L.TIPOS_DOM[s.domTipo]:""), [s.comprobanteURL], ["Comprobante"]) || ""}
+      ${fotosHTML("Documentación de garantía"+(tGar?" · "+tGar.nombre:""), s.garantiaURLs, null)}
+    </div>
+    ${firma?`<div class="firmabox"><img src="${firma}" alt="Firma del cliente"><div><b>Documentos firmados</b><span>${fmt(s.firmadoAt)}</span>${s.docsHash?`<code title="Huella digital SHA-256">${esc(s.docsHash.slice(0,16))}…</code>`:""}</div>
+      <button class="btn btn-ghost mini" data-docs="${esc(s.id)}">${ico("doc")} Ver / imprimir contrato, pagaré y aviso</button></div>`
+      : (s.estado==="activo"||s.estado==="aprobado"||s.estado==="por_firmar" ? `<div class="actions"><button class="btn btn-ghost mini" data-docs="${esc(s.id)}">${ico("doc")} Vista previa de documentos (sin firma)</button></div>`:"")}
+  </div>`;
+}
+function abrirDocumentos(id){
+  const s=solicitudes.find(x=>x.id===id); if(!s) return;
+  const f=s.firmadoAt&&s.firmadoAt.toDate?s.firmadoAt.toDate():null;
+  const html=L.todos(s,{fechaFirma: f||new Date(), firma: s.firmaURL?{img:s.firmaURL, fecha:f?f.toLocaleString("es-MX",{dateStyle:"long",timeStyle:"short"}):"", hash:s.docsHash||""}:null});
+  L.imprimir(html, "Expediente "+(s.razonSocial||s.nombre)+" "+s.id);
+}
+document.addEventListener("click", e=>{ const b=e.target.closest("[data-docs]"); if(b) abrirDocumentos(b.dataset.docs); });
+
+/* ===================== SEMANA EN LA QUE VA CADA CLIENTE ===================== */
+function semanaActual(s, r){
+  if(!r.fechas.length) return 0;
+  const hoy=new Date(); hoy.setHours(0,0,0,0);
+  const i=r.fechas.findIndex(d=>d>=hoy);
+  return i<0 ? r.plazo : i+1;
+}
+async function marcarHasta(sid, n, nota="Ajuste de semana"){
+  const s=solicitudes.find(x=>x.id===sid); if(!s) return;
+  const m=pagosData[sid]||{}; const b=writeBatch(db); let k=0;
+  for(let i=1;i<=n;i++) if(!(m[i]&&m[i].estado==="confirmado")){
+    b.set(doc(db,"solicitudes",sid,"pagos",String(i)), {semana:i, cuota:s.cuotaSemanal, estado:"confirmado", metodo:"manual", nota, uid:s.uid, confirmadoAt:serverTimestamp()}, {merge:true}); k++; }
+  if(k) await b.commit();
+  if(s.estado==="activo") await verificarLiquidacion(sid);
+  return k;
+}
+
+/* ===================== ALTA DE CLIENTES EXISTENTES ===================== */
+const app2 = initializeApp(firebaseConfig, "altaClientes");
+const auth2 = getAuth(app2);
+function genPass(){ const a="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789"; const v=new Uint32Array(10); crypto.getRandomValues(v); return "Lf-"+[...v].map(x=>a[x%a.length]).join(""); }
+const portalURL = () => new URL("prestamos.html", location.href).href;
+function mensajeAcceso(nombre, email, pass){
+  return `Hola ${nombre.split(" ")[0]}, te damos la bienvenida a ${CONFIG.EMPRESA}.\n\nPara formalizar tu préstamo entra a:\n${portalURL()}\n\nInicia sesión con:\nCorreo: ${email}${pass?`\nContraseña temporal: ${pass}`:""}\n\nAhí subirás tus documentos (identificación, comprobante de domicilio y garantía) y firmarás tu contrato, pagaré y aviso de privacidad.${pass?"\nTambién te enviamos un correo para que elijas tu propia contraseña.":""}`;
+}
+function hoyISO(){ const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,10); }
+function renderAltaForm(){
+  const cont=$("#altaForm"); if(cont.dataset.listo) return; cont.dataset.listo="1";
+  cont.innerHTML = `
+    <div class="card">
+      <h3>${ico("user")} Dar de alta a un cliente que ya tiene préstamo</h3>
+      <p class="muted" style="margin-top:4px">Se crea su cuenta y su préstamo. El cliente solo podrá entrar a <b>subir su documentación y firmar</b> el aviso de privacidad, el contrato de préstamo de confianza y el pagaré a nombre de <b>${esc(L.ACREEDOR.NOMBRE)}</b>.</p>
+      <div class="segA" id="aTipo"><button type="button" class="active" data-t="fisica">${ico("user")} Persona física</button><button type="button" data-t="moral">${ico("store")} Empresa</button></div>
+      <div class="fgrid">
+        <div class="full hidden" id="aRazonBox"><label for="aRazon">Razón social de la empresa</label><input id="aRazon" maxlength="150" placeholder="Ej. Comercializadora del Norte, S.A. de C.V."></div>
+        <div><label for="aNombre" id="aNombreLbl">Nombre completo del cliente</label><input id="aNombre" maxlength="120" placeholder="Nombre y apellidos"></div>
+        <div><label for="aTel">Teléfono (10 dígitos)</label><input id="aTel" type="tel" inputmode="numeric" placeholder="871 123 4567"></div>
+        <div class="full"><label for="aEmail">Correo electrónico (será su usuario)</label><input id="aEmail" type="email" autocomplete="off" placeholder="cliente@correo.com"></div>
+        <div><label for="aMonto">Monto prestado</label><input id="aMonto" type="number" inputmode="numeric" min="500" step="100" value="10000"></div>
+        <div><label for="aPlazo">Plazo (semanas)</label><input id="aPlazo" type="number" inputmode="numeric" min="1" max="104" value="${CONFIG.PLAZO_SEMANAS}"></div>
+        <div><label for="aCuota">Pago semanal</label><input id="aCuota" type="number" inputmode="numeric" min="1" step="1"></div>
+        <div><label for="aInicio">Fecha en que recibió el dinero</label><input id="aInicio" type="date" value="${hoyISO()}"></div>
+        <div class="full"><label for="aPagadas">¿Cuántas semanas lleva pagadas?</label><input id="aPagadas" type="number" inputmode="numeric" min="0" value="0"></div>
+      </div>
+      <div class="card resumenA" id="aResumen"></div>
+      <div id="altaMsg"></div>
+      <button class="btn btn-gold" id="btnAlta" style="width:100%;min-height:50px">${ico("check")} Crear cuenta y préstamo</button>
+    </div>
+    <div id="altaRes"></div>`;
+  let tipo="fisica", cuotaManual=false;
+  $("#aTipo").addEventListener("click", e=>{ const b=e.target.closest("button[data-t]"); if(!b) return; tipo=b.dataset.t;
+    $("#aTipo").querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));
+    $("#aRazonBox").classList.toggle("hidden", tipo!=="moral");
+    $("#aNombreLbl").textContent = tipo==="moral" ? "Nombre del representante legal" : "Nombre completo del cliente"; });
+  $("#aCuota").addEventListener("input", ()=>{ cuotaManual=true; resumen(); });
+  ["aMonto","aPlazo","aInicio","aPagadas"].forEach(id=>$("#"+id).addEventListener("input", ()=>{ if(id==="aMonto"&&!cuotaManual) $("#aCuota").value=Math.round(+$("#aMonto").value*CONFIG.FACTOR_SEMANAL)||""; resumen(); }));
+  $("#aCuota").value=Math.round(10000*CONFIG.FACTOR_SEMANAL);
+  function resumen(){
+    const monto=+$("#aMonto").value, plazo=+$("#aPlazo").value, cuota=+$("#aCuota").value, pag=+$("#aPagadas").value, ini=$("#aInicio").value;
+    if(!(monto>0&&plazo>0&&cuota>0&&ini)){ $("#aResumen").innerHTML='<span class="muted">Completa monto, plazo, pago y fecha.</span>'; return; }
+    const fechas=L.sabados(new Date(ini+"T12:00:00"), plazo), total=cuota*plazo;
+    const hoy=new Date(); hoy.setHours(0,0,0,0); const idx=fechas.findIndex(d=>d>=hoy); const va = idx<0?plazo:idx+1;
+    const debe = Math.max(0, (idx<0?plazo:idx) - pag);
+    $("#aResumen").innerHTML = `<div class="minikpis">
+      <div><span>Total a pagar</span><b>${money(total)}</b></div><div><span>Ganancia</span><b>${money(total-monto)}</b></div>
+      <div><span>Primer pago</span><b>${fmtFecha(fechas[0])}</b></div><div><span>Último pago</span><b>${fmtFecha(fechas[plazo-1])}</b></div>
+      <div><span>Va en la semana</span><b>${va} de ${plazo}</b></div><div class="${debe?"bad":""}"><span>Pagadas / vencidas</span><b>${Math.min(pag,plazo)} / ${debe}</b></div></div>`;
+  }
+  resumen();
+  $("#btnAlta").addEventListener("click", ()=>altaCliente(tipo));
+}
+async function altaCliente(tipo){
+  const am=$("#altaMsg"), v=id=>$("#"+id).value.trim();
+  const nombre=v("aNombre"), razon=v("aRazon"), tel=telDig(v("aTel")), email=v("aEmail").toLowerCase();
+  const monto=Math.round(+v("aMonto")), plazo=Math.round(+v("aPlazo")), cuota=Math.round(+v("aCuota")), ini=v("aInicio"), pagadas=Math.round(+v("aPagadas")||0);
+  if(tipo==="moral" && razon.length<3) return msg(am,"Escribe la razón social de la empresa.","err");
+  if(nombre.length<5||!nombre.includes(" ")) return msg(am,"Escribe el nombre completo (nombre y apellidos).","err");
+  if(tel.length!==10) return msg(am,"El teléfono debe tener 10 dígitos.","err");
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return msg(am,"Escribe un correo válido.","err");
+  if(!(monto>0)||!(plazo>=1&&plazo<=104)||!(cuota>0)) return msg(am,"Revisa monto, plazo y pago semanal.","err");
+  if(cuota*plazo<monto) return msg(am,"El total a pagar (pago × semanas) no puede ser menor al monto prestado.","err");
+  if(!ini) return msg(am,"Indica la fecha en que recibió el dinero.","err");
+  if(pagadas<0||pagadas>=plazo) return msg(am,`Las semanas pagadas deben ser de 0 a ${plazo-1}.`,"err");
+  if(!confirm(`¿Crear la cuenta de ${tipo==="moral"?razon:nombre} con un préstamo de ${money(monto)} (${plazo} pagos de ${money(cuota)}), con ${pagadas} semana(s) ya pagada(s)?`)) return;
+  const btn=$("#btnAlta"); btn.disabled=true; msg(am,'<span class="loader"></span> Creando cuenta…',"info");
+  let uid=null, pass="", nueva=false;
+  try{
+    let ex=await getDocs(query(collection(db,"users"), where("email","==",email)));
+    if(ex.empty) ex=await getDocs(query(collection(db,"users"), where("email","==",v("aEmail"))));
+    if(!ex.empty){ uid=ex.docs[0].id;
+      if(solicitudes.some(s=>s.uid===uid && ["pendiente","aprobado","por_firmar","activo"].includes(s.estado)))
+        throw new Error("Ese cliente ya tiene un préstamo o solicitud vigente. Revísalo en Préstamos activos o Solicitudes.");
+    }else{
+      pass=genPass();
+      try{ const cred=await createUserWithEmailAndPassword(auth2, email, pass); uid=cred.user.uid; nueva=true; }
+      catch(e){ if(e.code==="auth/email-already-in-use") throw new Error("Ese correo ya tiene una cuenta, pero sin perfil. Pide al cliente que inicie sesión una vez en el portal, o usa otro correo.");
+        if(e.code==="auth/operation-not-allowed") throw new Error("Activa el acceso con correo y contraseña en Firebase → Authentication.");
+        throw e; }
+      finally{ signOut(auth2).catch(()=>{}); }
+      await setDoc(doc(db,"users",uid), {nombre, telefono:tel, email, tipoDeudor:tipo, razonSocial: tipo==="moral"?razon:"", origen:"admin", createdAt:serverTimestamp()});
+    }
+    msg(am,'<span class="loader"></span> Registrando préstamo…',"info");
+    const ref = await addDoc(collection(db,"solicitudes"), {
+      uid, nombre, telefono:tel, email, clabe:"", tipoDeudor:tipo, razonSocial: tipo==="moral"?razon:"",
+      monto, cuotaSemanal:cuota, plazo, estado:"por_firmar", origen:"admin", contratoAceptado:false,
+      fechaInicio: Timestamp.fromDate(new Date(ini+"T12:00:00")), calendarioV:2,
+      createdAt:serverTimestamp(), aprobadoAt:serverTimestamp() });
+    if(pagadas>0){ const b=writeBatch(db);
+      for(let i=1;i<=pagadas;i++) b.set(doc(db,"solicitudes",ref.id,"pagos",String(i)), {semana:i, cuota, estado:"confirmado", metodo:"manual", nota:"Pagada antes del alta", uid, confirmadoAt:serverTimestamp()});
+      await b.commit(); }
+    if(nueva) sendPasswordResetEmail(auth, email).catch(()=>{});
+    msg(am,"");
+    const txt=mensajeAcceso(nombre,email,pass), wa=waCliente(tel);
+    $("#altaRes").innerHTML = `<div class="card okcard">
+      <h3>${ico("check-circle")} Cuenta creada</h3>
+      <p class="muted">Envía el acceso a <b>${esc(tipo==="moral"?razon:nombre)}</b>. Al entrar subirá sus documentos y firmará; su préstamo quedará activo automáticamente.</p>
+      <div class="kv"><span>Usuario</span><b>${esc(email)}</b></div>
+      ${pass?`<div class="kv"><span>Contraseña temporal</span><b><code>${esc(pass)}</code> <button class="btn btn-ghost mini" data-copy="${esc(pass)}">Copiar</button></b></div>`
+           :`<div class="kv"><span>Contraseña</span><b>La que el cliente ya usa</b></div>`}
+      <div class="actions">${wa?`<a class="btn btn-ok" href="${wa}?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener">${ico("whatsapp")} Enviar acceso por WhatsApp</a>`:""}
+        <button class="btn btn-ghost" data-copy="${esc(txt)}">${ico("copy")} Copiar mensaje</button></div>
+    </div>`;
+    bindComunes($("#altaRes"));
+    ["aNombre","aRazon","aTel","aEmail"].forEach(id=>$("#"+id).value=""); $("#aPagadas").value=0;
+  }catch(e){ msg(am, esc(e.message||e.code||e), "err"); }
+  finally{ btn.disabled=false; }
+}
+function renderAlta(){
+  renderAltaForm();
+  const cont=$("#altaLista");
+  const pf=solicitudes.filter(s=>s.estado==="por_firmar" && coincide(s));
+  badge("#bFirma", solicitudes.filter(s=>s.estado==="por_firmar").length);
+  cont.innerHTML = `<h2 class="subt">${ico("pen")} Esperando documentos y firma <span class="muted">(${pf.length})</span></h2>` + (pf.length ? pf.map(s=>`
+    <div class="card">
+      <div class="topbar"><div><h3>${esc(s.razonSocial||s.nombre)}</h3><div class="muted">${contactoHTML(s)}<span class="ct">${money(s.monto)} · ${esc(s.plazo)} × ${money(s.cuotaSemanal)}</span></div>
+        <div class="muted" style="font-size:.8rem">Alta: ${fmt(s.createdAt)} · Inicio: ${fmt(s.fechaInicio)}</div></div>
+        <span class="pill aprobado">Por firmar</span></div>
+      <div class="actions">
+        ${waCliente(s.telefono)?`<a class="btn btn-ok mini" href="${waCliente(s.telefono)}?text=${encodeURIComponent(mensajeAcceso(s.nombre,s.email,""))}" target="_blank" rel="noopener">${ico("whatsapp")} Recordar por WhatsApp</a>`:""}
+        <button class="btn btn-ghost mini" data-reset="${esc(s.email)}">${ico("mail")} Reenviar correo de contraseña</button>
+        <button class="btn btn-bad mini" data-cancel="${esc(s.id)}">Cancelar</button></div>
+    </div>`).join("") : vacio("No hay clientes pendientes de firma."));
+  bindComunes(cont);
+  cont.querySelectorAll("[data-reset]").forEach(b=>b.addEventListener("click", async ()=>{
+    b.disabled=true; try{ await sendPasswordResetEmail(auth, b.dataset.reset); b.textContent="Correo enviado ✓"; }catch(e){ b.disabled=false; alert("No se pudo enviar: "+(e.message||e.code)); } }));
+  cont.querySelectorAll("[data-cancel]").forEach(b=>b.addEventListener("click",()=>rechazar(b.dataset.cancel,b,"¿Cancelar este préstamo pendiente de firma?")));
+}
+
+/* ===================== REPORTES ===================== */
+function datosReporte(){
+  const filas=[]; const hoy=new Date(); const mes=hoy.getMonth(), anio=hoy.getFullYear();
+  const t={capitalVigente:0, capitalHist:0, retornoEsperado:0, cobrado:0, capitalRecuperado:0, gananciaCobrada:0, gananciaEsperada:0, porCobrar:0, vencido:0, cobradoMes:0, prestamos:0, liquidados:0, alCorriente:0, conAtraso:0};
+  solicitudes.filter(s=>["activo","liquidado","por_firmar"].includes(s.estado)).forEach(s=>{
+    const plazo=Number(s.plazo)||CONFIG.PLAZO_SEMANAS, cuota=Number(s.cuotaSemanal)||0, monto=Number(s.monto)||0, total=cuota*plazo;
+    const capSem=monto/plazo, intSem=cuota-capSem;
+    let conf=0, venc=0, va=0, ultimo=null;
+    if(s.estado==="liquidado"){ conf=plazo; va=plazo; t.liquidados++; }
+    else{ const r=resumenPrestamo(s); conf=r.conf; venc=r.venc; va=semanaActual(s,r);
+      Object.values(r.m).forEach(p=>{ if(p.estado==="confirmado"&&!p.nota&&p.confirmadoAt&&p.confirmadoAt.toDate){ const d=p.confirmadoAt.toDate();
+        if(d.getMonth()===mes&&d.getFullYear()===anio) t.cobradoMes+=Number(p.cuota)||cuota; if(!ultimo||d>ultimo) ultimo=d; } });
+      t.capitalVigente+=monto; t.porCobrar+=(plazo-conf)*cuota; t.vencido+=venc*cuota; t.prestamos++;
+      if(venc) t.conAtraso++; else t.alCorriente++; }
+    t.capitalHist+=monto; t.retornoEsperado+=total; t.gananciaEsperada+=total-monto;
+    t.cobrado+=conf*cuota; t.capitalRecuperado+=conf*capSem; t.gananciaCobrada+=conf*intSem;
+    filas.push({s, plazo, cuota, monto, total, conf, venc, va, cobrado:conf*cuota, resta:(plazo-conf)*cuota, ganancia:total-monto, gananciaCobrada:conf*intSem, ultimo});
+  });
+  filas.sort((a,b)=> (a.s.estado==="liquidado")-(b.s.estado==="liquidado") || b.venc-a.venc || (b.va/b.plazo)-(a.va/a.plazo));
+  return {t, filas};
+}
+let repFiltro="vigentes";
+function renderReportes(){
+  const cont=$("#tab-rep");
+  const {t, filas}=datosReporte();
+  const pct=(a,b)=> b ? Math.round(a/b*100) : 0;
+  const roi=pct(t.gananciaEsperada, t.capitalHist);
+  const vis=filas.filter(f=> (repFiltro==="todos" || (repFiltro==="vigentes"? f.s.estado!=="liquidado" : repFiltro==="atraso" ? f.venc>0 : f.s.estado==="liquidado")) && coincide(f.s));
+  const est=f=> f.s.estado==="liquidado" ? '<span class="pill liquidado">Liquidado</span>' : f.s.estado==="por_firmar" ? '<span class="pill aprobado">Por firmar</span>'
+    : f.venc ? `<span class="pill vencido">${f.venc} vencida${f.venc>1?"s":""}</span>` : '<span class="pill activo">Al corriente</span>';
+  cont.innerHTML = `
+    <div class="rep-kpis">
+      <div class="rk navy"><span>Capital invertido (vigente)</span><b>${money(t.capitalVigente)}</b><small>${t.prestamos} préstamo${t.prestamos===1?"":"s"} en curso</small></div>
+      <div class="rk"><span>Retorno esperado</span><b>${money(t.retornoEsperado)}</b><small>Capital + intereses de toda la cartera</small></div>
+      <div class="rk ok"><span>Ganancia esperada</span><b>${money(t.gananciaEsperada)}</b><small>Rendimiento ${roi}% sobre ${money(t.capitalHist)}</small></div>
+      <div class="rk ok"><span>Ganancia ya cobrada</span><b>${money(Math.round(t.gananciaCobrada))}</b><small>${pct(t.gananciaCobrada,t.gananciaEsperada)}% de la ganancia esperada</small></div>
+      <div class="rk"><span>Total cobrado</span><b>${money(t.cobrado)}</b><small>Capital recuperado ${money(Math.round(t.capitalRecuperado))}</small></div>
+      <div class="rk"><span>Por cobrar</span><b>${money(t.porCobrar)}</b><small>Cobrado este mes: ${money(t.cobradoMes)}</small></div>
+      <div class="rk ${t.vencido?"bad":""}"><span>Cartera vencida</span><b>${money(t.vencido)}</b><small>${t.conAtraso} con atraso · ${t.alCorriente} al corriente</small></div>
+      <div class="rk"><span>Préstamos liquidados</span><b>${t.liquidados}</b><small>Recuperación total ${pct(t.cobrado,t.retornoEsperado)}%</small></div>
+    </div>
+    <div class="card">
+      <div class="rep-head"><h3>${ico("chart")} Avance por cliente</h3>
+        <div class="rep-tools"><div class="segA sm" id="repSeg">
+          ${[["vigentes","En curso"],["atraso","Con atraso"],["liq","Liquidados"],["todos","Todos"]].map(([k,l])=>`<button type="button" data-f="${k}" class="${repFiltro===k?"active":""}">${l}</button>`).join("")}</div>
+          <button class="btn btn-ghost mini" id="repCsv">${ico("download")} Exportar</button></div></div>
+      ${vis.length?`<div class="tablewrap"><table class="rep">
+        <thead><tr><th>Cliente</th><th>Va en semana</th><th>Pagadas</th><th>Capital</th><th>Cobrado</th><th>Por cobrar</th><th>Ganancia</th><th>Estado</th><th></th></tr></thead>
+        <tbody>${vis.map(f=>`<tr>
+          <td data-label="Cliente"><b>${esc(f.s.razonSocial||f.s.nombre)}</b><small>${esc(f.s.telefono||"")}${f.s.fechaInicio?` · desde ${fmtFecha(f.s.fechaInicio.toDate?f.s.fechaInicio.toDate():new Date(f.s.fechaInicio))}`:""}</small></td>
+          <td data-label="Va en semana"><b>${f.va} / ${f.plazo}</b><div class="mbar"><span style="width:${pct(f.va,f.plazo)}%"></span></div></td>
+          <td data-label="Pagadas"><b>${f.conf} / ${f.plazo}</b><div class="mbar ok"><span style="width:${pct(f.conf,f.plazo)}%"></span></div></td>
+          <td data-label="Capital">${money(f.monto)}</td>
+          <td data-label="Cobrado">${money(f.cobrado)}</td>
+          <td data-label="Por cobrar">${money(f.resta)}</td>
+          <td data-label="Ganancia">${money(f.ganancia)}<small>cobrada ${money(Math.round(f.gananciaCobrada))}</small></td>
+          <td data-label="Estado">${est(f)}</td>
+          <td data-label="">${f.s.estado!=="liquidado"?`<button class="btn btn-ghost mini" data-ajuste="${esc(f.s.id)}">${ico("pen")} Semana</button>`:""}</td></tr>`).join("")}</tbody>
+        <tfoot><tr><td>Total (${vis.length})</td><td></td><td></td><td>${money(vis.reduce((a,f)=>a+f.monto,0))}</td><td>${money(vis.reduce((a,f)=>a+f.cobrado,0))}</td><td>${money(vis.reduce((a,f)=>a+f.resta,0))}</td><td>${money(vis.reduce((a,f)=>a+f.ganancia,0))}</td><td></td><td></td></tr></tfoot>
+      </table></div>`:vacio(filtro?"Sin resultados para la búsqueda.":"No hay préstamos en esta vista.")}
+    </div>`;
+  $("#repSeg").addEventListener("click", e=>{ const b=e.target.closest("button[data-f]"); if(!b) return; repFiltro=b.dataset.f; renderReportes(); });
+  $("#repCsv").addEventListener("click", ()=>{
+    const cel = v => { let x=String(v ?? ""); if(/^[=+\-@]/.test(x)) x="'"+x; return /[",\n;]/.test(x) ? `"${x.replace(/"/g,'""')}"` : x; };
+    const cols=["Cliente","Teléfono","Estado","Semana actual","Plazo","Semanas pagadas","Semanas vencidas","Capital","Pago semanal","Total","Cobrado","Por cobrar","Ganancia esperada","Ganancia cobrada"];
+    const rows=vis.map(f=>[f.s.razonSocial||f.s.nombre,f.s.telefono,f.s.estado,f.va,f.plazo,f.conf,f.venc,f.monto,f.cuota,f.total,f.cobrado,f.resta,f.ganancia,Math.round(f.gananciaCobrada)].map(cel).join(","));
+    const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob(["\ufeff"+cols.join(",")+"\n"+rows.join("\n")],{type:"text/csv;charset=utf-8"}));
+    a.download=`reporte_lujan_${new Date().toISOString().slice(0,10)}.csv`; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+  });
+  cont.querySelectorAll("[data-ajuste]").forEach(b=>b.addEventListener("click",()=>ajustarSemana(b.dataset.ajuste,b)));
+}
+async function ajustarSemana(sid, btn){
+  const s=solicitudes.find(x=>x.id===sid); if(!s) return;
+  const r=s.estado==="activo"?resumenPrestamo(s):{conf:0,plazo:s.plazo};
+  const v=prompt(`${s.razonSocial||s.nombre}\nTiene ${r.conf} de ${s.plazo} semanas confirmadas.\n\n¿Hasta qué semana lleva pagado? (las semanas anteriores se marcarán como pagadas en efectivo)`, String(r.conf));
+  if(v===null) return; const n=parseInt(v,10);
+  if(!(n>=0&&n<=s.plazo)) return alert(`Escribe un número de 0 a ${s.plazo}.`);
+  if(n<=r.conf) return alert("Ya tiene esas semanas pagadas. Para registrar una semana específica usa «Registrar como pagada» en Préstamos activos.");
+  if(btn) btn.disabled=true;
+  try{ const k=await marcarHasta(sid,n); if(k) alert(`Listo: ${k} semana(s) registradas como pagadas.`); }
+  catch(e){ alert("Error: "+(e.message||e.code)); }
+  finally{ if(btn) btn.disabled=false; }
+}
+
 /* --- Exportar CSV --- */
 $("#btnCsv").addEventListener("click", ()=>{
-  const cols=["id","estado","nombre","telefono","email","clabe","monto","cuotaSemanal","plazo","semanasPagadas","semanasVencidas","esPrimerPrestamo","ref1Nombre","ref1Tel","ref2Nombre","ref2Tel","motivoRechazo","createdAt","aprobadoAt","fechaInicio","liquidadoAt"];
+  const cols=["id","estado","origen","tipoDeudor","razonSocial","nombre","rfc","domicilio","telefono","email","clabe","monto","cuotaSemanal","plazo","semanasPagadas","semanasVencidas","garantiaTipo","garantiaDesc","ref1Nombre","ref1Tel","ref2Nombre","ref2Tel","motivoRechazo","createdAt","aprobadoAt","fechaInicio","firmadoAt","docsHash","liquidadoAt"];
   const f = v => v && v.toDate ? v.toDate().toISOString() : v;
   const cel = v => { let t=String(v ?? ""); if(/^[=+\-@]/.test(t)) t="'"+t; return /[",\n;]/.test(t) ? `"${t.replace(/"/g,'""')}"` : t; };
   const filas = solicitudes.map(s=>{ const r = s.estado==="activo" ? resumenPrestamo(s) : null;

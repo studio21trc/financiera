@@ -1,8 +1,8 @@
 /* Service worker — Grupo Luján Financiera
    Red primero: siempre muestra la versión más reciente y usa la copia guardada solo si no hay internet.
    Nunca guarda datos de Firebase (solicitudes, pagos, documentos). */
-const CACHE = 'lujan-v1';
-const BASE = ['prestamos.html', 'admin.html', 'manifest.webmanifest', 'admin.webmanifest',
+const CACHE = 'lujan-v2';
+const BASE = ['prestamos.html', 'admin.html', 'legal.js', 'manifest.webmanifest', 'admin.webmanifest',
   'img/icon-96.png', 'img/icon-180.png', 'img/icon-192.png', 'img/icon-512.png'];
 
 self.addEventListener('install', e => {
@@ -22,6 +22,8 @@ self.addEventListener('fetch', e => {
     fetch(req).then(res => {
       if (res.ok) { const copia = res.clone(); caches.open(CACHE).then(c => c.put(req, copia)); }
       return res;
-    }).catch(() => caches.match(req, { ignoreSearch: true }).then(r => r || caches.match('prestamos.html')))
+    }).catch(() => caches.match(req, { ignoreSearch: true })
+      // La página principal solo se usa como respaldo para navegaciones, nunca para scripts o imágenes.
+      .then(r => r || (req.mode === 'navigate' ? caches.match(req.url.includes('admin') ? 'admin.html' : 'prestamos.html') : Response.error())))
   );
 });
