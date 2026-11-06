@@ -19,18 +19,18 @@ service firebase.storage {
     // Identificaciones y comprobantes de domicilio: solo el dueño las sube; solo dueño y admin las ven.
     match /credenciales/{uid}/{archivo} {
       allow read: if isAdmin() || esDueno(uid);
-      allow create: if esDueno(uid) && imagenValida();
+      allow create: if esDueno(uid) && imagenValida() && resource == null;
       allow delete: if isAdmin();
     }
     match /domicilio/{uid}/{archivo} {
       allow read: if isAdmin() || esDueno(uid);
-      allow create: if esDueno(uid) && imagenValida();
+      allow create: if esDueno(uid) && imagenValida() && resource == null;
       allow delete: if isAdmin();
     }
     // Comprobantes de pago (ruta nueva: pagos/{uid}/{idPréstamo}/archivo)
     match /pagos/{uid}/{sid}/{archivo} {
       allow read: if isAdmin() || esDueno(uid);
-      allow create: if esDueno(uid) && imagenValida();
+      allow create: if esDueno(uid) && imagenValida() && resource == null;
       allow delete: if isAdmin();
     }
     // Comprobantes antiguos (ruta anterior: pagos/{idPréstamo}/archivo) — solo lectura para el admin
